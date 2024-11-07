@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public static class Palette
-{
-    public static readonly Color Light = new Color(251 / 255f, 238 / 255f, 191 / 255f, 255 / 255f);
-    public static readonly Color LightBlue = new Color(108 / 255f, 132 / 255f, 149 / 255f, 255 / 255f);
-    public static readonly Color DarkBlue = new Color(70 / 255f, 92 / 255f, 115 / 255f, 255 / 255f);
-}
 [RequireComponent(typeof(Camera))]
 public class CameraColorSwitch : MonoBehaviour
 {
@@ -15,30 +9,31 @@ public class CameraColorSwitch : MonoBehaviour
     void Awake()
     {
         cam = GetComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.SolidColor;
     }
 
     void Start()
     {
-        HandleStateChange(WorldState.Instance.GetState());
+        HandleStateChange(WorldStateManager.Instance.GetCurrentState());
     }
 
     public void HandleStateChange(object data)
     {
-        if (data is ColorState)
+        if (data is WorldState)
         {
-            switch ((ColorState)data)
+            switch ((WorldState)data)
             {
-                case ColorState.Light:
+                case WorldState.Light:
                     Debug.Log("light bg state");
                     cam.backgroundColor = Palette.Light;
                     break;
-                case ColorState.LightBlue:
+                case WorldState.MidTone:
                     Debug.Log("light blue bg state");
-                    cam.backgroundColor = Palette.LightBlue;
+                    cam.backgroundColor = Palette.MidTone;
                     break;
-                case ColorState.DarkBlue:
+                case WorldState.Dark:
                     Debug.Log("dark blue bg state");
-                    cam.backgroundColor = Palette.DarkBlue;
+                    cam.backgroundColor = Palette.Dark;
                     break;
             }
         }
