@@ -14,7 +14,7 @@ public class CameraColorSwitch : MonoBehaviour
 
     void Start()
     {
-        HandleStateChange(WorldStateManager.Instance.GetCurrentState());
+        HandleStateChange(WorldStateManager.Instance.State);
     }
 
     public void HandleStateChange(object data)

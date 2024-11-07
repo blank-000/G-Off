@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour
 
     void Start()
     {
-        HandleStateChange(WorldStateManager.Instance.GetCurrentState());
+        HandleStateChange(WorldStateManager.Instance.State);
         mat.color = WorldStateManager.Instance.GetStateColor(DisabledState);
     }
 
