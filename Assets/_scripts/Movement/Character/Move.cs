@@ -6,7 +6,7 @@ public class Move : MonoBehaviour
 {
     #region INPUT
 
-
+    public float DebugLineScale = 10f;
     Camera _cam;
     Vector3 _moveInput;
     public bool HasControls;
@@ -15,17 +15,18 @@ public class Move : MonoBehaviour
     {
         if (!isControlsOn) return;
 
-        _moveInput = new Vector3(input.x, 0F, input.y);
+        // _moveInput = new Vector3(input.x, 0F, input.y);
 
-        if (settings.isRelativeToCamera)
-        {
-            float angle = -_cam.transform.eulerAngles.y * Mathf.Deg2Rad;
+        //TODO get project the input to be relative to the transform forward/back ward, and
 
-            float rotatedX = _moveInput.x * Mathf.Cos(angle) - _moveInput.z * Mathf.Sin(angle);
-            float rotatedZ = _moveInput.x * Mathf.Sin(angle) + _moveInput.z * Mathf.Cos(angle);
+        _moveInput = transform.right * input.x + transform.forward * input.y;
 
-            _moveInput = new Vector3(rotatedX, 0f, rotatedZ);
-        }
+
+
+        // Debug.DrawLine(transform.position, transform.position + transform.right * input.x * DebugLineScale, Color.red);
+        // Debug.DrawLine(transform.position, transform.position + transform.forward * input.y * DebugLineScale, Color.blue);
+
+
         _moveInput.Normalize();
     }
 
@@ -70,6 +71,8 @@ public class Move : MonoBehaviour
     void FixedUpdate()
     {
         MoveByInput();
+        Debug.DrawLine(transform.position, transform.position + transform.right * _moveInput.x * DebugLineScale, Color.red);
+        Debug.DrawLine(transform.position, transform.position + transform.forward * _moveInput.z * DebugLineScale, Color.blue);
     }
 
 

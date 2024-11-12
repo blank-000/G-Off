@@ -31,6 +31,7 @@ public static class Palette
     public static Color Light => CurrentPalette.Light;
     public static Color MidTone => CurrentPalette.Mid;
     public static Color Dark => CurrentPalette.Dark;
+    public static Color Accent => CurrentPalette.Accent;
 
     // Initialize the palette (typically you would assign this in the editor)
     [RuntimeInitializeOnLoadMethod]

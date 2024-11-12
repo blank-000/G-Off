@@ -24,15 +24,9 @@ public class CameraColorSwitch : MonoBehaviour
             switch ((WorldState)data)
             {
                 case WorldState.Light:
-                    Debug.Log("light bg state");
                     cam.backgroundColor = Palette.Light;
                     break;
-                case WorldState.MidTone:
-                    Debug.Log("light blue bg state");
-                    cam.backgroundColor = Palette.MidTone;
-                    break;
                 case WorldState.Dark:
-                    Debug.Log("dark blue bg state");
                     cam.backgroundColor = Palette.Dark;
                     break;
             }

@@ -21,14 +21,14 @@ public class ChangeUpAxis : MonoBehaviour
             switch ((WorldState)data)
             {
                 case WorldState.Light:
-                    InitializeLerpTo(new Vector3(-30f, 0f, -90f));
-                    break;
-                case WorldState.MidTone:
-                    InitializeLerpTo(new Vector3(0f, 60f, 0f));
+                    InitializeLerpTo(new Vector3(90f, 0f, 0f));
                     break;
                 case WorldState.Dark:
-                    InitializeLerpTo(new Vector3(30f, 90f, 90f));
+                    InitializeLerpTo(Vector3.zero);
                     break;
+                    // case WorldState.Dark:
+                    //     InitializeLerpTo(new Vector3(30f, 90f, 90f));
+                    //     break;
             }
         }
     }

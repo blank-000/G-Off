@@ -4,8 +4,7 @@ using UnityEngine;
 public enum WorldState
 {
     Light,
-    Dark,
-    MidTone
+    Dark
 }
 
 
@@ -30,10 +29,9 @@ public class WorldStateManager : MonoBehaviour
         Inputs.nextEvent += NextState;
 
         // state setup and init
-        _possibleStates = new WorldState[3]{
-            WorldState.Light,
+        _possibleStates = new WorldState[2]{
             WorldState.Dark,
-            WorldState.MidTone,
+            WorldState.Light
         };
         State = _possibleStates[_stateIndex];
 
@@ -46,8 +44,6 @@ public class WorldStateManager : MonoBehaviour
         {
             case WorldState.Light:
                 return Palette.Light;
-            case WorldState.MidTone:
-                return Palette.MidTone;
             case WorldState.Dark:
                 return Palette.Dark;
         }
