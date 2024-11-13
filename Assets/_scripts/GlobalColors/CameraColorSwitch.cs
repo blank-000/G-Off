@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEditor;
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
 public class CameraColorSwitch : MonoBehaviour
 {
 
     Camera cam;
 
-    void Awake()
+    void OnEnable()
     {
         cam = GetComponent<Camera>();
         cam.clearFlags = CameraClearFlags.SolidColor;
