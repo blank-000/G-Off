@@ -6,15 +6,26 @@ public class TextLocalizer : MonoBehaviour
 {
 
     TextMeshProUGUI _textField;
+    string _key;
 
-    public LocalizedString localizedString;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
         _textField = GetComponent<TextMeshProUGUI>();
-        _textField.text = localizedString.value;
+        _key = _textField.text;
+#if UNITY_EDITOR
+        if (!LocalizationSystem.GetCurrentDictionary(LocalizationSystem.SelectedLanguage).ContainsKey(_key)) LocalizationSystem.Replace(_key, _textField.text);
+#endif
+        _textField.text = LocalizationSystem.GetLocalizedText(_key);
+        LocalizationManager.Instance.RegisterLocalizedText(this);
+    }
+    void OnDisable()
+    {
+        LocalizationManager.Instance.DeregisterLocalizedText(this);
     }
 
-
+    public void UpdateLanguage(Language newLanguage)
+    {
+        _textField.text = LocalizationSystem.GetLocalizedText(_key);
+    }
 }

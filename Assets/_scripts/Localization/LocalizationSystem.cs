@@ -5,7 +5,7 @@ using UnityEngine;
 public class LocalizationSystem
 {
     // the currently active language
-    public static Language SelectedLanguage = Language.french;
+    public static Language SelectedLanguage = Language.english;
 
     // all available localizations
     static Dictionary<string, string> _localizationEN = new Dictionary<string, string>();
@@ -26,12 +26,27 @@ public class LocalizationSystem
         isInitialized = true;
     }
 
-    public static Dictionary<string, string> GetEditorDictionary()
+    public static Dictionary<string, string> GetCurrentDictionary(Language language)
     {
         if (!isInitialized) Init();
+        UpdateDictionaries();
+
+        switch (language)
+        {
+            case Language.english:
+                return _localizationEN;
+            case Language.french:
+                return _localizationFR;
+            case Language.german:
+                return _localizationGR;
+            case Language.bulgarian:
+                return _localizationBG;
+        }
+
         return _localizationEN;
     }
 
+#if UNITY_EDITOR
     public static void Add(string key, string value)
     {
         // reformat quotation marks from the incoming value
@@ -60,6 +75,7 @@ public class LocalizationSystem
 
     public static void Replace(string key, string value)
     {
+
         // reformat quotation marks from the incoming value
         if (value.Contains("\"")) value.Replace('"', '\"');
 
@@ -72,7 +88,7 @@ public class LocalizationSystem
         UpdateDictionaries();
     }
 
-
+#endif
 
     public static void UpdateDictionaries()
     {
@@ -83,10 +99,10 @@ public class LocalizationSystem
         _localizationGR = loader.GetLocalizedValues(Language.german);
         _localizationBG = loader.GetLocalizedValues(Language.bulgarian);
 
-        // foreach (var key in _localizationEN)
-        // {
-        //     Debug.Log(key.Key + " - " + key.Value);
-        // }
+        foreach (var key in _localizationFR)
+        {
+            Debug.Log(key.Key + " - " + key.Value);
+        }
     }
 
     public static string GetLocalizedText(string key)
