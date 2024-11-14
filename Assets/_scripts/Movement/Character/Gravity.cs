@@ -32,7 +32,7 @@ public class Gravity : MonoBehaviour
                     _gravityDirection = Vector3.back;
                     break;
                 case WorldState.Dark:
-                    // y is up
+                    // y is up this is the starting state
                     _gravityDirection = Vector3.down;
                     break;
             }

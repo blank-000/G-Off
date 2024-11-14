@@ -43,7 +43,7 @@ public class Rotate : MonoBehaviour
 
 
         // Check if the input vector is almost zero
-        if (UtilsMaths.AlmostZero(_moveInput))
+        if (XMath.AlmostZero(_moveInput))
         {
             // If no movement input, retain current forward direction but align it with the ground
             forwardDir = Vector3.ProjectOnPlane(transform.forward, upDir);
@@ -55,7 +55,7 @@ public class Rotate : MonoBehaviour
         }
 
         // when the Up Axis is Paralel to the ground (Finished slope corrections)
-        if (!UtilsMaths.AlmostZero(forwardDir))
+        if (!XMath.AlmostZero(forwardDir))
         {
             Quaternion rotationToFace = Quaternion.LookRotation(forwardDir, upDir.normalized);
 
@@ -67,7 +67,7 @@ public class Rotate : MonoBehaviour
     void UpdateUprightForce()
     {
         Quaternion characterCurrent = transform.rotation;
-        Quaternion toGoal = UtilsMaths.ShortestRotation(TargetRotation, characterCurrent);
+        Quaternion toGoal = XMath.ShortestRotation(TargetRotation, characterCurrent);
 
         // Convert quaternion to angle-axis representation
         toGoal.ToAngleAxis(out float rotDegrees, out Vector3 rotAxis);

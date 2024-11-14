@@ -1,0 +1,37 @@
+key,en,gr,fr,bg
+ui_accept,yes,ja,oui,да
+ui_back,back,zurück,retour,назад
+ui_cancel,cancel,abbrechen,annuler,отказ
+ui_continue,continue,fortsetzen,continuer,продължи
+ui_exit,exit,ausgang,sortie,изход
+ui_help,help,hilfe,aide,помощ
+ui_options,options,optionen,options,опции
+ui_settings,settings,einstellungen,paramètres,настройки
+ui_language,language,sprache,langue,език
+ui_confirm,confirm,bestätigen,confirmer,потвърди
+ui_decline,decline,ablehnen,refuser,откажи
+ui_start,start,starten,démarrer,старт
+ui_save,save,speichern,sauvegarder,запази
+ui_load,load,laden,charger,зареди
+ui_retry,retry,wiederholen,réessayer,опитай отново
+ui_skip,skip,überspringen,passer,пропусни
+ui_new_game,new game,neues spiel,nouveau jeu,нова игра
+ui_resume,resume,fortfahren,reprendre,възобнови
+ui_pause,pause,pause,pause,пауза
+ui_quit,quit,beenden,quitter,изход
+ui_yes,yes,ja,oui,да
+ui_no,no,nein,non,не
+ui_volume,volume,lautstärke,volume,сила на звука
+ui_music,music,musik,musique,музика
+ui_sound_effects,sound effects,soundeffekte,effets sonores,звукови ефекти
+ui_graphics,graphics,grafik,graphismes,графика
+ui_brightness,brightness,helligkeit,luminosité,яркост
+ui_contrast,contrast,kontrast,contraste,контраст
+ui_apply,apply,anwenden,appliquer,приложи
+ui_reset,reset,zurücksetzen,réinitialiser,нулиране
+ui_default,default,standard,par défaut,по подразбиране
+ui_high_score,high score,hohe punktzahl,meilleur score,най-добър резултат
+ui_game_over,game over,spiel vorbei,fin de jeu,край на играта
+ui_welcome,welcome,willkommen,bienvenue,добре дошли
+ui_error,error,fehler,erreur,грешка
+new_accept,"Awh, Hells Yeah!",
