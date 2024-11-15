@@ -101,7 +101,7 @@ public class CSVLoader
 
     public void AddEntry(string key, string value)
     {
-        string appended = string.Format("\n{0},\"{1}\",", key, value);
+        string appended = string.Format("\n{0},{1}", key, value);
         File.AppendAllText(_filePath, appended);
 
         UnityEditor.AssetDatabase.Refresh();

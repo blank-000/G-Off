@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -99,37 +100,39 @@ public class LocalizationSystem
         _localizationGR = loader.GetLocalizedValues(Language.german);
         _localizationBG = loader.GetLocalizedValues(Language.bulgarian);
 
-        foreach (var key in _localizationFR)
-        {
-            Debug.Log(key.Key + " - " + key.Value);
-        }
+        // foreach (var key in _localizationFR)
+        // {
+        //     Debug.Log(key.Key + " - " + key.Value);
+        // }
     }
 
+
+    /// <summary>
+    ///     Returns the translated value at key. If none is found returns the english value 
+    /// </summary>
     public static string GetLocalizedText(string key)
     {
         if (!isInitialized) Init();
 
-        // this is clever, if we don't find a value we will return the 
-        // key associated and so we know where we are missing a translation
-        string value = key;
+        string translatedValue = null;
 
         switch (SelectedLanguage)
         {
             case Language.english:
-                _localizationEN.TryGetValue(key, out value);
+                _localizationEN.TryGetValue(key, out translatedValue);
                 break;
             case Language.french:
-                _localizationFR.TryGetValue(key, out value);
+                _localizationFR.TryGetValue(key, out translatedValue);
                 break;
             case Language.german:
-                _localizationGR.TryGetValue(key, out value);
+                _localizationGR.TryGetValue(key, out translatedValue);
                 break;
             case Language.bulgarian:
-                _localizationBG.TryGetValue(key, out value);
+                _localizationBG.TryGetValue(key, out translatedValue);
                 break;
         }
-
-        return value;
+        if (translatedValue == null) return key;
+        return translatedValue;
     }
 
 }
