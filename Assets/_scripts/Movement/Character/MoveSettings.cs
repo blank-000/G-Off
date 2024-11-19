@@ -14,7 +14,7 @@ public class MoveSettings : ScriptableObject
     public AnimationCurve accelerationFactorFromDot;
     public float maxAccelerationForce;
     public AnimationCurve maxAccelerationFactorFromDot;
-    public Vector3 forceScale;
+
 
     [Space(20)]
     [Header("Rotation Motion Settings")]

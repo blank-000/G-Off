@@ -29,23 +29,60 @@ public class Gravity : MonoBehaviour
             {
                 case WorldState.Light:
                     // x is up 
-                    _gravityDirection = Vector3.back;
+                    _gravityDirection = Vector3.forward;
                     break;
                 case WorldState.Dark:
-                    // y is up this is the starting state
+                    // y is up. this is the starting state
                     _gravityDirection = Vector3.down;
                     break;
             }
         }
     }
 
-    public float ForwardOffsetDegreees = 30f;
+    public float ForwardOffsetDegreees = 45f;
 
     void FixedUpdate()
     {
-        _rb.AddForce(GravityForceScale * _gravityDirection * _rb.mass * Time.deltaTime, ForceMode.VelocityChange);
+        // _rb.AddForce(GravityForceScale * _gravityDirection * _rb.mass * Time.deltaTime, ForceMode.VelocityChange);
 
-        //Careful GPT Drivvel follows, Check and double check
+
+        // RotateUp();
+        SpringRide();
+    }
+
+    public float RideHeight = 1f;
+    public float Damping = 1f;
+    public float Frequency = 6f;
+    public LayerMask Ground;
+
+    Vector3 targetPosition;
+    void SpringRide()
+    {
+        targetPosition = transform.position;
+        if (Physics.Raycast(transform.position, _gravityDirection, out RaycastHit hitInfo, Ground))
+        {
+            targetPosition = hitInfo.point + transform.up * RideHeight;
+            Debug.Log(targetPosition);
+        }
+
+        Debug.DrawLine(transform.position, transform.position + (_gravityDirection * RideHeight), Color.yellow);
+
+        Vector3 vel = _rb.linearVelocity;
+        transform.position = XMath.Spring(transform.position, targetPosition, ref vel, Damping, Frequency, Time.deltaTime);
+        _rb.linearVelocity = vel;
+
+
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(targetPosition, 0.1f);
+    }
+
+    void RotateUp()
+    {
+
+        //Careful!! GPT Drivvel follows, Check and double check
 
         // Define your target forward and up directions
         Vector3 targetUp = -_gravityDirection.normalized;
@@ -68,6 +105,5 @@ public class Gravity : MonoBehaviour
             Vector3 torque = axis * angle * Mathf.Deg2Rad * 50f;
             _rb.AddTorque(torque, ForceMode.VelocityChange);
         }
-
     }
 }

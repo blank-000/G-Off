@@ -38,8 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _IsDark: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Tolerance: 0.999
     m_Colors:
     - _Dark: {r: 0.28301886, g: 0.1285288, b: 0.06274473, a: 1}
     - _Light: {r: 0.9647059, g: 0.6509804, b: 0.3960784, a: 1}

@@ -93,7 +93,7 @@ public class Move : MonoBehaviour
         float maxAccel = settings.maxAccelerationForce * settings.maxAccelerationFactorFromDot.Evaluate(velDot);
 
         neededAccel = Vector3.ClampMagnitude(neededAccel, maxAccel);
-        Vector3 forwardForce = Vector3.Scale(neededAccel * _RB.mass, settings.forceScale);
+        Vector3 forwardForce = neededAccel * _RB.mass;
 
         _RB.AddForce(forwardForce);
     }

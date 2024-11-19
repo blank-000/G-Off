@@ -17,7 +17,7 @@ public class CSVLoader
     // translations file reference
     private TextAsset _csvFile;
     // variables pointing to file
-    private static string _fileName = "LocalizationFromSheets";
+    private static string _fileName = "Localization";
     private static string _filePath = "Assets/Resources/" + _fileName + ".csv";
     // delimiters
     private char _newLine = '\n';
@@ -101,8 +101,18 @@ public class CSVLoader
 
     public void AddEntry(string key, string value)
     {
-        string appended = string.Format("\n{0},{1}", key, value);
-        File.AppendAllText(_filePath, appended);
+        string lineToAppend;
+
+        // if there are commas in the string wrap the values in quotes
+        if (value.Contains(_commas))
+            lineToAppend = string.Format("\n\"{0}\",\"{1}\"", key, value);
+
+        // otherwise just add them directly
+        else
+            lineToAppend = string.Format("\n{0},{1}", key, value);
+
+
+        File.AppendAllText(_filePath, lineToAppend);
 
         UnityEditor.AssetDatabase.Refresh();
     }
