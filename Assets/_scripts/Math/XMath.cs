@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -24,6 +25,17 @@ public static class XMath
     public static bool AlmostZero(Vector3 vector, float tolerance = 0.01f)
     {
         return vector.sqrMagnitude < tolerance * tolerance;
+    }
+
+    public static bool PracticallyEqual(Quaternion a, Quaternion b)
+    {
+        var tolerance = 0.01f;
+        return
+            Mathf.Abs(a.x - b.x) < tolerance &&
+            Mathf.Abs(a.y - b.y) < tolerance &&
+            Mathf.Abs(a.z - b.z) < tolerance &&
+            Mathf.Abs(a.w - b.w) < tolerance;
+
     }
 
     // frame independent lerp smoothing for positions

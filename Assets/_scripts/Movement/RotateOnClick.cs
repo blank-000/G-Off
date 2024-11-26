@@ -1,52 +1,57 @@
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class RotateOnClick : MonoBehaviour
 {
-    InputReader _intput;
-    Camera _cam;
-
     public float RotationStep = 90f;
     public Vector3 RotationAxis = Vector3.up;
     public float RotationSpeed = 5f;
 
-    Quaternion targetRotation;
+    Quaternion _targetRotation;
+    bool isRotating;
 
     public void Start()
     {
-        targetRotation = transform.rotation;
-        _cam = Camera.main;
-        _intput = WorldStateManager.Instance.Inputs;
-        _intput.attackEvent += OnClick;
+        _targetRotation = transform.rotation;
     }
 
-    public void OnClick()
+    public void HandleStateChange(object data)
     {
-        Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
-        Ray ray = _cam.ScreenPointToRay(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, 0f));
-
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (data is WorldState state)
         {
-            RotateOnClick rotator = hitInfo.transform.GetComponent<RotateOnClick>();
-            if (rotator == null) return;
-
-            rotator.Activate();
+            switch (state)
+            {
+                case WorldState.Light:
+                    // x is up 
+                    RotationAxis = Vector3.forward;
+                    break;
+                case WorldState.Dark:
+                    // y is up
+                    RotationAxis = Vector3.up;
+                    break;
+            }
         }
     }
 
+
     public void Activate()
     {
-        float x = RotationStep * RotationAxis.x;
-        float y = RotationStep * RotationAxis.y;
-        float z = RotationStep * RotationAxis.z;
+        if (isRotating) return;
+        // _targetRotation *= Quaternion.Euler(RotationAxis * RotationStep);
+        _targetRotation = Quaternion.AngleAxis(RotationStep, RotationAxis) * transform.rotation;
 
-        targetRotation *= Quaternion.Euler(x, y, z);
+        isRotating = true;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        // reset the rotation values to 0 when the rotation is complete
+        if (XMath.PracticallyEqual(_targetRotation, transform.rotation))
+        {
+            transform.rotation = _targetRotation;
+            isRotating = false;
+            return;
+        }
+        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, RotationSpeed * Time.deltaTime);
     }
 }

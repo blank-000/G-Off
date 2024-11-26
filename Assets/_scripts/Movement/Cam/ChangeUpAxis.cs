@@ -21,14 +21,12 @@ public class ChangeUpAxis : MonoBehaviour
             switch ((WorldState)data)
             {
                 case WorldState.Light:
-                    InitializeLerpTo(new Vector3(90f, 0f, 0f));
+                    InitializeLerpTo(new Vector3(-90f, 0f, 0f));
                     break;
                 case WorldState.Dark:
                     InitializeLerpTo(Vector3.zero);
                     break;
-                    // case WorldState.Dark:
-                    //     InitializeLerpTo(new Vector3(30f, 90f, 90f));
-                    //     break;
+
             }
         }
     }
@@ -51,11 +49,7 @@ public class ChangeUpAxis : MonoBehaviour
         if (Quaternion.Angle(transform.rotation, _targetRotation) < .1f) return;
 
         _timer += Time.deltaTime;
-
         float elapsed = _timer / TimeToComplete;
-
-
-
 
         transform.rotation = Quaternion.Lerp(_startRotation, _targetRotation, SmoothFn.Evaluate(elapsed));
 

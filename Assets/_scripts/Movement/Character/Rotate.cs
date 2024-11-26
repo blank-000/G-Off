@@ -16,6 +16,7 @@ public class Rotate : MonoBehaviour
         _moveInput = transform.right * input.x + transform.forward * input.y;
 
         _moveInput.Normalize();
+        // Debug.Log(_moveInput);
     }
 
 

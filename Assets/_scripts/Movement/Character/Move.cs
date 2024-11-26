@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 
 
 public class Move : MonoBehaviour
@@ -10,6 +10,7 @@ public class Move : MonoBehaviour
     Camera _cam;
     Vector3 _moveInput;
     public bool HasControls;
+    public event UnityAction<bool> OnMoving;
 
     public void OnMove(Vector2 input)
     {
@@ -53,6 +54,11 @@ public class Move : MonoBehaviour
     bool isControlsOn;
 
 
+    public void SetMoving(bool isMoving)
+    {
+        OnMoving?.Invoke(isMoving);
+    }
+
     void Awake()
     {
         _cam = Camera.main;
@@ -70,9 +76,10 @@ public class Move : MonoBehaviour
 
     void FixedUpdate()
     {
+        SetMoving(!XMath.AlmostZero(_moveInput));
         MoveByInput();
-        Debug.DrawLine(transform.position, transform.position + transform.right * _moveInput.x * DebugLineScale, Color.red);
-        Debug.DrawLine(transform.position, transform.position + transform.forward * _moveInput.z * DebugLineScale, Color.blue);
+        // Debug.DrawLine(transform.position, transform.position + transform.right * _moveInput.x * DebugLineScale, Color.red);
+        // Debug.DrawLine(transform.position, transform.position + transform.forward * _moveInput.z * DebugLineScale, Color.blue);
     }
 
 

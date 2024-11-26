@@ -46,38 +46,38 @@ public class Gravity : MonoBehaviour
         // _rb.AddForce(GravityForceScale * _gravityDirection * _rb.mass * Time.deltaTime, ForceMode.VelocityChange);
 
 
-        // RotateUp();
-        SpringRide();
+        RotateUp();
+        // SpringRide();
     }
 
-    public float RideHeight = 1f;
-    public float Damping = 1f;
-    public float Frequency = 6f;
-    public LayerMask Ground;
+    // public float RideHeight = 1f;
+    // public float Damping = 1f;
+    // public float Frequency = 6f;
+    // public LayerMask Ground;
 
-    Vector3 targetPosition;
-    void SpringRide()
-    {
-        targetPosition = transform.position;
-        if (Physics.Raycast(transform.position, _gravityDirection, out RaycastHit hitInfo, Ground))
-        {
-            targetPosition = hitInfo.point + transform.up * RideHeight;
-            Debug.Log(targetPosition);
-        }
+    // Vector3 targetPosition;
+    // void SpringRide()
+    // {
+    //     targetPosition = transform.position;
+    //     if (Physics.Raycast(transform.position, _gravityDirection, out RaycastHit hitInfo, Ground))
+    //     {
+    //         targetPosition = hitInfo.point + transform.up * RideHeight;
+    //         Debug.Log(targetPosition);
+    //     }
 
-        Debug.DrawLine(transform.position, transform.position + (_gravityDirection * RideHeight), Color.yellow);
+    //     Debug.DrawLine(transform.position, transform.position + (_gravityDirection * RideHeight), Color.yellow);
 
-        Vector3 vel = _rb.linearVelocity;
-        transform.position = XMath.Spring(transform.position, targetPosition, ref vel, Damping, Frequency, Time.deltaTime);
-        _rb.linearVelocity = vel;
+    //     Vector3 vel = _rb.linearVelocity;
+    //     transform.position = XMath.Spring(transform.position, targetPosition, ref vel, Damping, Frequency, Time.deltaTime);
+    //     _rb.linearVelocity = vel;
 
 
-    }
+    // }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(targetPosition, 0.1f);
-    }
+    // void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(targetPosition, 0.1f);
+    // }
 
     void RotateUp()
     {
