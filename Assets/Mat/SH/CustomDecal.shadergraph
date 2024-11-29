@@ -558,7 +558,7 @@
     "m_ObjectId": "29aadbbe450047b3a4b5efb556156bbb",
     "m_DecalData": {
         "affectsAlbedo": true,
-        "affectsNormalBlend": true,
+        "affectsNormalBlend": false,
         "affectsNormal": false,
         "affectsMAOS": false,
         "affectsEmission": false,
@@ -1368,10 +1368,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1140.7230224609375,
-            "y": -156.44198608398438,
-            "width": 0.0,
-            "height": 0.0
+            "x": 1047.0001220703125,
+            "y": -307.0000915527344,
+            "width": 208.0,
+            "height": 302.0000305175781
         }
     },
     "m_Slots": [

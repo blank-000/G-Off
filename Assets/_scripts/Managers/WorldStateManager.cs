@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum WorldState
@@ -13,6 +14,10 @@ public class WorldStateManager : MonoBehaviour
     public GameEvent OnStateChange;
     public InputReader Inputs;
     public static WorldStateManager Instance;
+    public Transform player;
+    public Vector3 GravityAxis = Vector3.down;
+    public float MaxCheckDistance = .5f;
+    public LayerMask Ground;
 
     public WorldState State { get; private set; }
 
@@ -34,9 +39,17 @@ public class WorldStateManager : MonoBehaviour
             WorldState.Light
         };
         State = _possibleStates[_stateIndex];
-
+        if (player == null)
+        {
+            player = FindFirstObjectByType<Rotate>().transform;
+        }
     }
 
+
+    public bool CanTransitionState()
+    {
+        return Physics.Raycast(player.position, player.forward, MaxCheckDistance, Ground);
+    }
 
     public Color GetStateColor(WorldState state)
     {
@@ -51,14 +64,20 @@ public class WorldStateManager : MonoBehaviour
     }
 
 
+
+
     public void NextState()
     {
+        if (!CanTransitionState()) return;
         _stateIndex = (_stateIndex + 1 + _possibleStates.Length) % _possibleStates.Length;
         State = _possibleStates[_stateIndex];
         OnStateChange.Raise(State);
     }
+
+
     public void PreviousState()
     {
+        if (!CanTransitionState()) return;
         _stateIndex = (_stateIndex - 1 + _possibleStates.Length) % _possibleStates.Length;
         State = _possibleStates[_stateIndex];
         OnStateChange.Raise(State);

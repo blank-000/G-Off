@@ -10,9 +10,16 @@ public class Fire : MonoBehaviour
     public GameObject BlobPrefab;
     public Transform _barrel;
 
+    Rotate rotate;
+
+    void Awake()
+    {
+        rotate = FindFirstObjectByType<Rotate>();
+    }
     void OnEnable()
     {
         inputs.jumpEvent += OnFireInput;
+        PlayerAnimationRelay.I.RegisterComponent(this);
     }
     void OnDisable()
     {
@@ -30,9 +37,9 @@ public class Fire : MonoBehaviour
         // handle animation fire event
 
         // spawn projectile
-        GameObject blob = Instantiate(BlobPrefab);
-        blob.transform.position = _barrel.position;
-        blob.transform.rotation = _barrel.rotation;
+        GameObject blob = Instantiate(BlobPrefab, _barrel.position, _barrel.rotation);
+
+
         // play sound
         // spawn fx
     }

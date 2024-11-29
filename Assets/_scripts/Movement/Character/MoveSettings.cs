@@ -5,7 +5,6 @@ public class MoveSettings : ScriptableObject
 {
     [Header("Input")]
     public InputReader input;
-    public bool isRelativeToCamera;
 
     [Space(20)]
     [Header("Movement Motion Settings")]
@@ -16,10 +15,6 @@ public class MoveSettings : ScriptableObject
     public AnimationCurve maxAccelerationFactorFromDot;
 
 
-    [Space(20)]
-    [Header("Rotation Motion Settings")]
-    public float SpringDamper;
-    public float SpringStrength;
 
 
 }

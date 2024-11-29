@@ -1,108 +1,101 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public class Move : MonoBehaviour
 {
-    #region INPUT
+    #region INPUT && Events
 
-    public float DebugLineScale = 10f;
     Camera _cam;
     Vector3 _moveInput;
-    public bool HasControls;
-    public event UnityAction<bool> OnMoving;
 
+
+    // recieve input and align it to the camera view in relation to the player up 
     public void OnMove(Vector2 input)
     {
         if (!isControlsOn) return;
 
-        // _moveInput = new Vector3(input.x, 0F, input.y);
+        // project the input according to the camera orientation
+        Vector3 camF = _cam.transform.forward;
+        Vector3 camR = _cam.transform.right;
+        _moveInput = Vector3.ProjectOnPlane(camR * input.x + camF * input.y, transform.up).normalized;
 
-        //TODO get project the input to be relative to the transform forward/back ward, and
-
-        _moveInput = transform.right * input.x + transform.forward * input.y;
-
-
-
-        // Debug.DrawLine(transform.position, transform.position + transform.right * input.x * DebugLineScale, Color.red);
-        // Debug.DrawLine(transform.position, transform.position + transform.forward * input.y * DebugLineScale, Color.blue);
-
-
-        _moveInput.Normalize();
     }
+
+    // notify the animator that the player is moving
+    public event UnityAction<bool> OnMoving;
+    public void SetMoving(bool isMoving) => OnMoving?.Invoke(isMoving);
+
 
     //allows other scripts to toggle the move controls
-    public void EnableControls()
-    {
-        isControlsOn = true;
-    }
-    public void DisableControls()
-    {
-        isControlsOn = false;
-    }
+    public bool isControlsOn;
+
 
     #endregion
 
-    // settings
-    [SerializeField] MoveSettings settings;
+    // _settings
+    [SerializeField] MoveSettings _settings;
 
-    // Ref
-    Rigidbody _RB;
+    [SerializeField] float _offset;
+    [SerializeField] float _groundDistance;
+    [SerializeField] float _rideHeight;
+    [SerializeField] LayerMask _groundMask;
 
-    // Var
-    Vector3 GoalVel = Vector3.zero;
-    bool isControlsOn;
-
-
-    public void SetMoving(bool isMoving)
-    {
-        OnMoving?.Invoke(isMoving);
-    }
 
     void Awake()
     {
         _cam = Camera.main;
-        _RB = GetComponent<Rigidbody>();
 
-        if (settings.input != null)
+        if (_settings.input != null)
         {
-            settings.input.moveEvent += OnMove;
-            HasControls = true;
+            _settings.input.moveEvent += OnMove;
         }
 
-        EnableControls();
+        isControlsOn = true;
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         SetMoving(!XMath.AlmostZero(_moveInput));
+        // RideOnSurface();
         MoveByInput();
-        // Debug.DrawLine(transform.position, transform.position + transform.right * _moveInput.x * DebugLineScale, Color.red);
-        // Debug.DrawLine(transform.position, transform.position + transform.forward * _moveInput.z * DebugLineScale, Color.blue);
     }
 
 
+    void RideOnSurface()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, _groundDistance, _groundMask))
+        {
+            Vector3 VerticalPosition = transform.up;
+            transform.position = XMath.FILerp(transform.localPosition, hit.point + transform.up * _rideHeight, 8f);
+        }
+
+    }
+
+    RaycastHit hitInfo;
     void MoveByInput()
     {
-        Vector3 unitVel = GoalVel.normalized;
-
-        float velDot = Vector3.Dot(_moveInput, unitVel);
-
-        float accel = settings.acceleration * settings.accelerationFactorFromDot.Evaluate(velDot);
-
-        Vector3 goalVel = _moveInput * settings.maxSpeed;
-
-        GoalVel = Vector3.MoveTowards(GoalVel, goalVel, accel * Time.fixedDeltaTime);
-
-        Vector3 neededAccel = (GoalVel - _RB.linearVelocity) / Time.fixedDeltaTime;
-
-        float maxAccel = settings.maxAccelerationForce * settings.maxAccelerationFactorFromDot.Evaluate(velDot);
-
-        neededAccel = Vector3.ClampMagnitude(neededAccel, maxAccel);
-        Vector3 forwardForce = neededAccel * _RB.mass;
-
-        _RB.AddForce(forwardForce);
+        Vector3 NextPosition = transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+        // if after moving in the direction of input we would leave the ground platform
+        if (!Physics.Raycast(NextPosition, -transform.up, out hitInfo, _groundDistance, _groundMask))
+        {
+            RecalculateMoveInputAlongEdge(hitInfo);
+        }
+        else
+        {
+            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+        }
     }
+
+
+    void RecalculateMoveInputAlongEdge(RaycastHit hit)
+    {
+        // calculate a ray _offset in the moveinput direction;
+        Vector3 rayStart = transform.position + (_moveInput * _offset);
+        _moveInput = Vector3.ProjectOnPlane(_moveInput, hitInfo.normal);
+        Debug.DrawLine(rayStart, rayStart - transform.up, Color.red);
+    }
+
+
 
 }

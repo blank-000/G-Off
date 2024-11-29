@@ -4,11 +4,11 @@ using UnityEngine;
 public class Splash : MonoBehaviour
 {
     public GameObject prefab;
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        GameObject splash = Instantiate(prefab);
-        prefab.transform.position = transform.position;
-        prefab.transform.rotation = transform.rotation;
+        GameObject splash = Instantiate(prefab, transform.position, transform.rotation);
+
+        splash.transform.SetParent(other.transform);
         Destroy(this.gameObject);
     }
 }

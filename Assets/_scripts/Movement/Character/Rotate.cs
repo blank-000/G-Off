@@ -1,95 +1,90 @@
+
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Rotate : MonoBehaviour
 {
-    // Movement Settings
-    [SerializeField] MoveSettings _settings;
-
-    Rigidbody _RB;
+    Vector2 _mouseScreenPosition;
     Camera _cam;
+    Vector3 WorldPos;
+    [HideInInspector]
+    public Vector3 ProjectedWorldPos;
+    // public Vector3 VerticalOffset;
+    public float ReorientationSpeed;
+    Vector3 _gravityDirection;
+    bool _isReorienting;
 
-    Vector3 _moveInput = Vector3.zero;
-    [HideInInspector] public Quaternion TargetRotation;
-
-    public void OnMove(Vector2 input)
-    {
-        _moveInput = transform.right * input.x + transform.forward * input.y;
-
-        _moveInput.Normalize();
-        // Debug.Log(_moveInput);
-    }
-
-
-    void Awake()
+    void OnEnable()
     {
         _cam = Camera.main;
-        _RB = GetComponent<Rigidbody>();
-        if (_settings.input != null)
+    }
+
+    void Start()
+    {
+        WorldStateManager.Instance.player = this.transform;
+    }
+
+    public void HandleStateChange(object data)
+    {
+        if (data is WorldState state)
         {
-            _settings.input.moveEvent += OnMove;
+            switch (state)
+            {
+                case WorldState.Light:
+                    // x is up 
+                    _gravityDirection = Vector3.forward;
+                    WorldStateManager.Instance.GravityAxis = _gravityDirection;
+                    StartCoroutine(ReorientUp());
+                    break;
+                case WorldState.Dark:
+                    // y is up. this is the starting state
+                    _gravityDirection = Vector3.down;
+                    WorldStateManager.Instance.GravityAxis = _gravityDirection;
+                    StartCoroutine(ReorientUp());
+                    break;
+            }
         }
     }
 
+
+
+    IEnumerator ReorientUp()
+    {
+        _isReorienting = true;
+
+        // Define the target rotation based on -_gravityDirection.
+        Quaternion targetRotation = Quaternion.FromToRotation(transform.up, -_gravityDirection) * transform.rotation;
+
+        // Smoothly interpolate rotation.
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * ReorientationSpeed);
+            yield return null;
+        }
+
+        // Snap to the exact target rotation to avoid precision issues.
+        transform.rotation = targetRotation;
+        _isReorienting = false;
+    }
 
     void FixedUpdate()
     {
-        RotateToInput();
-        UpdateUprightForce();
+        // do not interupt the coroutine
+        if (_isReorienting) return;
+
+
+        _mouseScreenPosition = Mouse.current.position.ReadValue();
+        WorldPos = _cam.ScreenToWorldPoint(new Vector3(_mouseScreenPosition.x, _mouseScreenPosition.y, (_cam.transform.position - transform.position).magnitude));
+        ProjectedWorldPos = Vector3.ProjectOnPlane(WorldPos - transform.position, transform.up);
+
+
+        Quaternion target = Quaternion.LookRotation(ProjectedWorldPos, transform.up);
+        transform.rotation = target;
     }
 
-    void RotateToInput()
-    {
-        Vector3 upDir = transform.up;
-        Vector3 forwardDir;
 
 
-        // Check if the input vector is almost zero
-        if (XMath.AlmostZero(_moveInput))
-        {
-            // If no movement input, retain current forward direction but align it with the ground
-            forwardDir = Vector3.ProjectOnPlane(transform.forward, upDir);
-        }
-        else
-        {
-            // Calculate forward direction based on movement input vector
-            forwardDir = Vector3.ProjectOnPlane(_moveInput, upDir);
-        }
 
-        // when the Up Axis is Paralel to the ground (Finished slope corrections)
-        if (!XMath.AlmostZero(forwardDir))
-        {
-            Quaternion rotationToFace = Quaternion.LookRotation(forwardDir, upDir.normalized);
-
-            // Apply rotation
-            TargetRotation = rotationToFace;
-        }
-    }
-
-    void UpdateUprightForce()
-    {
-        Quaternion characterCurrent = transform.rotation;
-        Quaternion toGoal = XMath.ShortestRotation(TargetRotation, characterCurrent);
-
-        // Convert quaternion to angle-axis representation
-        toGoal.ToAngleAxis(out float rotDegrees, out Vector3 rotAxis);
-
-        // Normalize the rotation axis
-        if (rotAxis != Vector3.zero)
-        {
-            rotAxis.Normalize();
-
-            // Convert rotation degrees to radians
-            float rotRadians = rotDegrees * Mathf.Deg2Rad;
-
-            // Calculate the spring torque based on the angle difference
-            Vector3 springTorque = rotAxis * (rotRadians * _settings.SpringStrength);
-
-            // Calculate the damping torque based on the current angular velocity
-            Vector3 dampingTorque = -_RB.angularVelocity * _settings.SpringDamper;
-
-            // Apply the total torque to the rigidbody, scaled by the mass
-            _RB.AddTorque((springTorque + dampingTorque) * _RB.mass);
-        }
-    }
 
 }

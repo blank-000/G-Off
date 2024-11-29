@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InitColor : MonoBehaviour
 {
     public bool SearchInChildren;
+    public bool WorkWithUI;
     public enum ChooseColorFromPalette
     {
         Light,
@@ -22,6 +24,17 @@ public class InitColor : MonoBehaviour
     void Start()
     {
         EvaluateColor(Choice);
+
+        // currently only works with raw image components, and exits early if the bool is set
+        if (WorkWithUI)
+        {
+            var img = GetComponent<RawImage>();
+            if (img != null)
+            {
+                img.color = _col;
+            }
+            return;
+        }
 
         // go trough and find all renderers
         if (SearchInChildren)
