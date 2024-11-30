@@ -21,7 +21,7 @@ public class ArcMovement : MonoBehaviour
     Vector3 gravity;
     public void Launch()
     {
-        gravity = WorldStateManager.Instance.GravityAxis;
+        // gravity = WorldStateManager.Instance.GravityAxis;
         target = transform.position + transform.forward * 6;
         launchVelocity = CalculateLaunchVelocity(target);
 

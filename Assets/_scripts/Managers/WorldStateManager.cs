@@ -1,5 +1,3 @@
-
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum WorldState
@@ -12,17 +10,18 @@ public enum WorldState
 public class WorldStateManager : MonoBehaviour
 {
     public GameEvent OnStateChange;
+    public GameEvent OnAxisChange;
+
     public InputReader Inputs;
-    public static WorldStateManager Instance;
-    public Transform player;
-    public Vector3 GravityAxis = Vector3.down;
-    public float MaxCheckDistance = .5f;
+
+    Transform _player;
+    public float MaxCheckDistance = .7f;
     public LayerMask Ground;
 
+    public static WorldStateManager Instance;
     public WorldState State { get; private set; }
 
-    WorldState[] _possibleStates;
-    int _stateIndex = 0;
+    RaycastHit hitInfo;
 
     void Awake()
     {
@@ -30,27 +29,22 @@ public class WorldStateManager : MonoBehaviour
         if (Instance == null) Instance = this;
 
         // input setup
-        Inputs.previousEvent += PreviousState;
-        // Inputs.nextEvent += NextState;
+        Inputs.activateEvent += ChangeState;
 
-        // state setup and init
-        _possibleStates = new WorldState[2]{
-            WorldState.Dark,
-            WorldState.Light
-        };
-        State = _possibleStates[_stateIndex];
-        if (player == null)
+
+        State = WorldState.Dark;
+        if (_player == null)
         {
-
-            player = FindFirstObjectByType<Rotate>().transform;
+            _player = FindFirstObjectByType<Rotate>().transform;
         }
     }
 
 
     public bool CanTransitionState()
     {
-        return Physics.Raycast(player.position, player.forward, MaxCheckDistance, Ground);
+        return Physics.Raycast(_player.position, _player.forward, out hitInfo, MaxCheckDistance, Ground);
     }
+
 
     public Color GetStateColor(WorldState state)
     {
@@ -64,28 +58,18 @@ public class WorldStateManager : MonoBehaviour
         return new Color(1f, 1f, 1f, 1f);
     }
 
-
-    public void SetState(WorldState state)
+    public void ResetState()
     {
-        State = state;
-        OnStateChange.Raise(State);
-
-    }
-
-    public void NextState()
-    {
-        if (!CanTransitionState()) return;
-        _stateIndex = (_stateIndex + 1 + _possibleStates.Length) % _possibleStates.Length;
-        State = _possibleStates[_stateIndex];
+        State = WorldState.Dark;
+        OnAxisChange.Raise(Vector3.up);
         OnStateChange.Raise(State);
     }
 
-
-    public void PreviousState()
+    void ChangeState()
     {
         if (!CanTransitionState()) return;
-        _stateIndex = (_stateIndex - 1 + _possibleStates.Length) % _possibleStates.Length;
-        State = _possibleStates[_stateIndex];
+        State = (State == WorldState.Dark) ? WorldState.Light : WorldState.Dark;
+        OnAxisChange.Raise(hitInfo.normal);
         OnStateChange.Raise(State);
     }
 

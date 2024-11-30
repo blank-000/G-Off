@@ -96,45 +96,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnCameraRotation: {fileID: 11400000, guid: 4beed561c39c21b40bc3f9e776db49a7, type: 2}
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
-  TimeToComplete: 1
+  TimeToComplete: 0.5
   SmoothFn:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0
-      outSlope: -0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.18250512
-    - serializedVersion: 3
-      time: 0.32334328
-      value: 0.06455846
-      inSlope: 0.8077822
-      outSlope: 0.8077822
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.6280958
-      value: 0.8282392
-      inSlope: 1.3393025
-      outSlope: 1.3393025
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.05633058
-      outSlope: -0.05633058
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.30345678
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -151,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  gameEvent: {fileID: 11400000, guid: a7c56bddc178cb3489abfdeea4357b35, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -225,7 +207,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.28301886, g: 0.1285288, b: 0.06274473, a: 1}
+  m_BackGroundColor: {r: 0.9647059, g: 0.6509804, b: 0.3960784, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

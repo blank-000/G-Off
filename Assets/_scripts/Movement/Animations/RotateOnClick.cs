@@ -22,6 +22,13 @@ public class RotateOnClick : MonoBehaviour
 
     public void HandleStateChange(object data)
     {
+        if (data is Vector3 newUp)
+        {
+            RotationAxis = newUp;
+            // Quaternion newTarget = Quaternion.FromToRotation(transform.up, RotationAxis) * transform.rotation;
+            // InitializeLerpTo(newTarget.eulerAngles);
+
+        }
         if (data is WorldState state)
         {
             switch (state)
@@ -39,39 +46,25 @@ public class RotateOnClick : MonoBehaviour
     }
 
 
-    public void Activate()
+    public void Activate(int direction)
     {
         if (isRotating) return;
+        _audioS.pitch = Random.Range(.95f, 1.05f);
         _audioS.Play();
-        Quaternion newTarget = Quaternion.AngleAxis(RotationStep, RotationAxis) * transform.rotation;
-        InitializeLerpTo(newTarget.eulerAngles);
+        Quaternion newTarget = Quaternion.AngleAxis(direction * RotationStep, RotationAxis) * transform.rotation;
+        InitializeLerpTo(newTarget);
 
     }
 
-
-    void InitializeLerpTo(Vector3 newTarget)
+    // move away from euler angles due to them not working correctly on web build
+    void InitializeLerpTo(Quaternion newTarget)
     {
-        Vector3 eulerSigns = new Vector3(
-                Mathf.Sign(newTarget.x),
-                Mathf.Sign(newTarget.y),
-                Mathf.Sign(newTarget.z)
-            );
-        Vector3 eulerAbs = new Vector3(
-                Mathf.Abs(newTarget.x),
-                Mathf.Abs(newTarget.y),
-                Mathf.Abs(newTarget.z)
-            );
-
-        Vector3 snappedEuler = new Vector3(
-            eulerSigns.x * (eulerAbs.x - (eulerAbs.x % RotationStep)),
-            eulerSigns.y * (eulerAbs.y - (eulerAbs.y % RotationStep)),
-            eulerSigns.z * (eulerAbs.z - (eulerAbs.z % RotationStep))
-        );
-        _targetRotation = Quaternion.Euler(snappedEuler);
+        _targetRotation = newTarget;
         _startRotation = transform.rotation;
         _timer = 0f;
         isRotating = true;
     }
+
 
     void CompleteLerp()
     {

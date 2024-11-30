@@ -18,12 +18,12 @@ public class Fire : MonoBehaviour
     }
     void OnEnable()
     {
-        inputs.jumpEvent += OnFireInput;
+        inputs.clickEvent += OnFireInput;
         PlayerAnimationRelay.I.RegisterComponent(this);
     }
     void OnDisable()
     {
-        inputs.jumpEvent -= OnFireInput;
+        inputs.clickEvent -= OnFireInput;
     }
 
     void OnFireInput()

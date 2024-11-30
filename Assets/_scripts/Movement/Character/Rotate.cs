@@ -7,11 +7,11 @@ public class Rotate : MonoBehaviour
 {
     Vector2 _mouseScreenPosition;
     Camera _cam;
-    Vector3 WorldPos;
+    Vector3 _worldLookAtPosition;
     [HideInInspector]
     public Vector3 ProjectedWorldPos;
-    // public Vector3 VerticalOffset;
     public float ReorientationSpeed;
+
     Vector3 _gravityDirection;
     bool _isReorienting;
 
@@ -19,12 +19,17 @@ public class Rotate : MonoBehaviour
 
     void Start()
     {
-        WorldStateManager.Instance.player = this.transform;
         _cam = Camera.main;
     }
 
     public void HandleStateChange(object data)
     {
+
+        if (data is Vector3 newUp)
+        {
+            _gravityDirection = -newUp;
+            StartCoroutine(ReorientUp());
+        }
         if (data is WorldState state)
         {
             switch (state)
@@ -32,13 +37,11 @@ public class Rotate : MonoBehaviour
                 case WorldState.Light:
                     // x is up 
                     _gravityDirection = Vector3.forward;
-                    WorldStateManager.Instance.GravityAxis = _gravityDirection;
                     StartCoroutine(ReorientUp());
                     break;
                 case WorldState.Dark:
                     // y is up. this is the starting state
                     _gravityDirection = Vector3.down;
-                    WorldStateManager.Instance.GravityAxis = _gravityDirection;
                     StartCoroutine(ReorientUp());
                     break;
             }
@@ -73,8 +76,8 @@ public class Rotate : MonoBehaviour
 
 
         _mouseScreenPosition = Mouse.current.position.ReadValue();
-        WorldPos = _cam.ScreenToWorldPoint(new Vector3(_mouseScreenPosition.x, _mouseScreenPosition.y, (_cam.transform.position - transform.position).magnitude));
-        ProjectedWorldPos = Vector3.ProjectOnPlane(WorldPos - transform.position, transform.up);
+        _worldLookAtPosition = _cam.ScreenToWorldPoint(new Vector3(_mouseScreenPosition.x, _mouseScreenPosition.y, (_cam.transform.position - transform.position).magnitude));
+        ProjectedWorldPos = Vector3.ProjectOnPlane(_worldLookAtPosition - transform.position, transform.up);
 
 
         Quaternion target = Quaternion.LookRotation(ProjectedWorldPos, transform.up);

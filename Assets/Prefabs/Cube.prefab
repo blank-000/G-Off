@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f3adc5ec7b593468f210d48e13f4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToComplete: 0.4
+  TimeToComplete: 0.3
   SmoothFn:
     serializedVersion: 2
     m_Curve:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  gameEvent: {fileID: 11400000, guid: a7c56bddc178cb3489abfdeea4357b35, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -186,9 +186,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1666561818793289666, guid: fca688d4bbe330b46a19175977a1f1c0, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 44fa87dcead59bc47802a21581faddb0, type: 3}
-  m_Resource: {fileID: 8300000, guid: 44fa87dcead59bc47802a21581faddb0, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 45f09e7d90b730c46b9abedcb488cf0a, type: 3}
+  m_Resource: {fileID: 8300000, guid: 45f09e7d90b730c46b9abedcb488cf0a, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

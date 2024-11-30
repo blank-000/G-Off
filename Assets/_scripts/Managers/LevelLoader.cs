@@ -1,66 +1,77 @@
+using System;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct Level
 {
-    public GameObject levelGeometry;
-    public Vector3 CameraStartRotation;
+    public string Hint;
+    public GameObject LevelObject;
+    public bool RequiresStateChange;
 
-    public Level(GameObject geo, Vector3 camAngle)
+
+    public Level(string hint, GameObject go, bool _requreStateChange = false)
     {
-        levelGeometry = geo;
-        CameraStartRotation = camAngle;
+        Hint = hint;
+        LevelObject = go;
+        RequiresStateChange = _requreStateChange;
     }
 }
 
 public class LevelLoader : MonoBehaviour
 {
-    int nextLvl, currentLvl;
+    public InputReader inputs;
+    public GameEvent OnLevelLoading;
     public Level[] levels;
+
+    int _currentLevelIndex;
     Transform _player;
     ChangeUpAxis _camRotation;
     Vector3 levelStart = Vector3.zero;
+    GameObject currentlevel;
 
     void Awake()
     {
-        levels = new Level[transform.childCount];
-        int i = 0;
-        foreach (Transform child in transform)
-        {
-            Level level = new Level(child.gameObject, Vector3.zero);
-            levels[i] = level;
-            i++;
-        }
+        inputs.resetLevelEvent += ReloadLevel;
     }
 
     void Start()
     {
         _player = FindFirstObjectByType<Player>().transform;
         _camRotation = FindFirstObjectByType<ChangeUpAxis>();
-        currentLvl = 0;
-        nextLvl = currentLvl + 1;
-        _player.position = levelStart;
-        _camRotation.SetLevelRotation(levels[nextLvl].CameraStartRotation);
     }
 
-
-
-    public void LoadNextScene(object data)
+    public void StartTheGame(object data)
     {
-        WorldStateManager.Instance.SetState(WorldState.Dark);
-        levels[currentLvl].levelGeometry.gameObject.SetActive(false);
-        if (nextLvl < levels.Length)
-        {
-            _player.position = levelStart;
-            _player.rotation = quaternion.identity;
-            _camRotation.SetLevelRotation(levels[nextLvl].CameraStartRotation);
-            levels[nextLvl].levelGeometry.gameObject.SetActive(true);
-        }
-        currentLvl = nextLvl;
-        nextLvl = currentLvl + 1;
-
+        LoadLevel(0);
     }
+
+
+    void LoadLevel(int index)
+    {
+        if (currentlevel != null) Destroy(currentlevel);
+        if (levels[index].RequiresStateChange) WorldStateManager.Instance.ResetState();
+        currentlevel = Instantiate(levels[index].LevelObject, Vector3.zero, Quaternion.identity);
+
+        OnLevelLoading.Raise(levels[index]);
+
+        _player.position = levelStart;
+        _player.rotation = quaternion.identity;
+        _camRotation.SetLevelRotation(Vector3.zero);
+    }
+
+
+    void ReloadLevel()
+    {
+        LoadLevel(_currentLevelIndex);
+    }
+
+    public void LoadNextLevel(object data)
+    {
+        _currentLevelIndex++;
+        LoadLevel(_currentLevelIndex);
+    }
+
+
+
 }

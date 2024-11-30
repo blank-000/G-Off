@@ -22,7 +22,7 @@ public class PlayerAnimationRelay : MonoBehaviour
                 _animator = GetComponentInChildren<Animator>();
             }
         }
-        _move = GetComponent<Move>();
+        _move = GetComponentInParent<Move>();
 
     }
 
