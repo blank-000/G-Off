@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  DecaySlope: 1
+  DecaySlope: 5
 --- !u!114 &5872088987205221982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735e1a642e0ff6943a10fa012954147b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnCameraRotation: {fileID: 11400000, guid: 4beed561c39c21b40bc3f9e776db49a7, type: 2}
+  inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   TimeToComplete: 1
   SmoothFn:
     serializedVersion: 2

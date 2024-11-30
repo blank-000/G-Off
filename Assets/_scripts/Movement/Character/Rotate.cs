@@ -15,14 +15,12 @@ public class Rotate : MonoBehaviour
     Vector3 _gravityDirection;
     bool _isReorienting;
 
-    void OnEnable()
-    {
-        _cam = Camera.main;
-    }
+
 
     void Start()
     {
         WorldStateManager.Instance.player = this.transform;
+        _cam = Camera.main;
     }
 
     public void HandleStateChange(object data)

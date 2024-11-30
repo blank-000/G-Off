@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMoveSettings
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
-  maxSpeed: 2
+  maxSpeed: 1.5
   acceleration: 15
   accelerationFactorFromDot:
     serializedVersion: 2

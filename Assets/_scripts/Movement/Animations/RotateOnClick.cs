@@ -1,16 +1,22 @@
 using UnityEngine;
 
+
+// This is a almost one to one repeat of ChangeUpAxis, both of which should be refactored. 
 public class RotateOnClick : MonoBehaviour
 {
-    public float RotationStep = 90f;
-    public Vector3 RotationAxis = Vector3.up;
-    public float RotationSpeed = 5f;
+    AudioSource _audioS;
+    float RotationStep = 90f;
+    Vector3 RotationAxis = Vector3.up;
+    public float TimeToComplete;
+    public AnimationCurve SmoothFn;
 
-    Quaternion _targetRotation;
+    Quaternion _targetRotation, _startRotation;
+    float _timer = 0f;
     bool isRotating;
 
     public void Start()
     {
+        _audioS = GetComponent<AudioSource>();
         _targetRotation = transform.rotation;
     }
 
@@ -36,22 +42,58 @@ public class RotateOnClick : MonoBehaviour
     public void Activate()
     {
         if (isRotating) return;
-        // _targetRotation *= Quaternion.Euler(RotationAxis * RotationStep);
-        _targetRotation = Quaternion.AngleAxis(RotationStep, RotationAxis) * transform.rotation;
+        _audioS.Play();
+        Quaternion newTarget = Quaternion.AngleAxis(RotationStep, RotationAxis) * transform.rotation;
+        InitializeLerpTo(newTarget.eulerAngles);
 
+    }
+
+
+    void InitializeLerpTo(Vector3 newTarget)
+    {
+        Vector3 eulerSigns = new Vector3(
+                Mathf.Sign(newTarget.x),
+                Mathf.Sign(newTarget.y),
+                Mathf.Sign(newTarget.z)
+            );
+        Vector3 eulerAbs = new Vector3(
+                Mathf.Abs(newTarget.x),
+                Mathf.Abs(newTarget.y),
+                Mathf.Abs(newTarget.z)
+            );
+
+        Vector3 snappedEuler = new Vector3(
+            eulerSigns.x * (eulerAbs.x - (eulerAbs.x % RotationStep)),
+            eulerSigns.y * (eulerAbs.y - (eulerAbs.y % RotationStep)),
+            eulerSigns.z * (eulerAbs.z - (eulerAbs.z % RotationStep))
+        );
+        _targetRotation = Quaternion.Euler(snappedEuler);
+        _startRotation = transform.rotation;
+        _timer = 0f;
         isRotating = true;
     }
 
+    void CompleteLerp()
+    {
+        transform.rotation = _targetRotation;
+        _timer = 0f;
+        isRotating = false;
+    }
 
     void Update()
     {
-        // reset the rotation values to 0 when the rotation is complete
-        if (XMath.PracticallyEqual(_targetRotation, transform.rotation))
+        if (!isRotating) return;
+        // if (Quaternion.Angle(transform.rotation, _targetRotation) < .1f) return;
+
+        _timer += Time.deltaTime;
+        float elapsed = _timer / TimeToComplete;
+
+        transform.rotation = Quaternion.Lerp(_startRotation, _targetRotation, SmoothFn.Evaluate(elapsed));
+
+        if (_timer > TimeToComplete)
         {
-            transform.rotation = _targetRotation;
-            isRotating = false;
-            return;
+            CompleteLerp();
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, RotationSpeed * Time.deltaTime);
     }
+
 }

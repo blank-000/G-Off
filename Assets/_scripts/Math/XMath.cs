@@ -29,13 +29,18 @@ public static class XMath
 
     public static bool PracticallyEqual(Quaternion a, Quaternion b)
     {
-        var tolerance = 0.01f;
+        var tolerance = 0.001f;
         return
             Mathf.Abs(a.x - b.x) < tolerance &&
             Mathf.Abs(a.y - b.y) < tolerance &&
             Mathf.Abs(a.z - b.z) < tolerance &&
             Mathf.Abs(a.w - b.w) < tolerance;
-
+    }
+    public static Quaternion FILerp(Quaternion a, Quaternion b, float slope)
+    {
+        // Using Slerp (spherical linear interpolation)
+        float t = Mathf.Exp(-slope * Time.deltaTime); // Smoothing factor
+        return Quaternion.Slerp(a, b, t);
     }
 
     // frame independent lerp smoothing for positions

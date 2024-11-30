@@ -31,7 +31,7 @@ public class WorldStateManager : MonoBehaviour
 
         // input setup
         Inputs.previousEvent += PreviousState;
-        Inputs.nextEvent += NextState;
+        // Inputs.nextEvent += NextState;
 
         // state setup and init
         _possibleStates = new WorldState[2]{
@@ -41,6 +41,7 @@ public class WorldStateManager : MonoBehaviour
         State = _possibleStates[_stateIndex];
         if (player == null)
         {
+
             player = FindFirstObjectByType<Rotate>().transform;
         }
     }
@@ -64,7 +65,12 @@ public class WorldStateManager : MonoBehaviour
     }
 
 
+    public void SetState(WorldState state)
+    {
+        State = state;
+        OnStateChange.Raise(State);
 
+    }
 
     public void NextState()
     {

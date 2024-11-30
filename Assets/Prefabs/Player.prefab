@@ -57,16 +57,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3839313546119958815}
-  - component: {fileID: 3105388110800901637}
   - component: {fileID: 9003477709819483299}
   - component: {fileID: 5207144836751232598}
   - component: {fileID: 1887905399565870364}
   - component: {fileID: 3812359343278808242}
   - component: {fileID: 9139161840474784393}
   - component: {fileID: 1880249859151620136}
+  - component: {fileID: 2969794966760957490}
+  - component: {fileID: 3122259435128933712}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,33 +88,6 @@ Transform:
   - {fileID: 9122927824907022031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &3105388110800901637
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139589065446936096}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 45
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &9003477709819483299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,12 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isControlsOn: 0
   _settings: {fileID: 11400000, guid: 9f5a69dabe311a44db5d15cb09b6bda3, type: 2}
+  _offset: 0.2
+  _groundDistance: 1
+  _rideHeight: 0.5
   _groundMask:
     serializedVersion: 2
     m_Bits: 128
-  _groundDistance: 1
-  RideHeight: 0.5
-  offset: 0.2
 --- !u!114 &5207144836751232598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +127,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3812359343278808242}
         m_TargetAssemblyTypeName: Gravity, Assembly-CSharp
         m_MethodName: HandleStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9003477709819483299}
+        m_TargetAssemblyTypeName: Move, Assembly-CSharp
+        m_MethodName: UpdateInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -225,6 +211,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gun: {fileID: 5702649230593578828}
+--- !u!54 &2969794966760957490
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139589065446936096}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3122259435128933712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139589065446936096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4beed561c39c21b40bc3f9e776db49a7, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9003477709819483299}
+        m_TargetAssemblyTypeName: Move, Assembly-CSharp
+        m_MethodName: UpdateInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5702649230593578828
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,18 +7,23 @@ public class Move : MonoBehaviour
 
     Camera _cam;
     Vector3 _moveInput;
+    Vector2 _rawInput;
 
 
-    // recieve input and align it to the camera view in relation to the player up 
+    // recieve input 
     public void OnMove(Vector2 input)
     {
         if (!isControlsOn) return;
+        _rawInput = input;
+        UpdateInput(true);
+    }
 
+    public void UpdateInput(object data)
+    {
         // project the input according to the camera orientation
         Vector3 camF = _cam.transform.forward;
         Vector3 camR = _cam.transform.right;
-        _moveInput = Vector3.ProjectOnPlane(camR * input.x + camF * input.y, transform.up).normalized;
-
+        _moveInput = Vector3.ProjectOnPlane(camR * _rawInput.x + camF * _rawInput.y, transform.up).normalized;
     }
 
     // notify the animator that the player is moving
@@ -41,7 +46,7 @@ public class Move : MonoBehaviour
     [SerializeField] LayerMask _groundMask;
 
 
-    void Awake()
+    void Start()
     {
         _cam = Camera.main;
 
@@ -56,30 +61,41 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+
         SetMoving(!XMath.AlmostZero(_moveInput));
-        // RideOnSurface();
+        RideOnSurface();
         MoveByInput();
     }
+
 
 
     void RideOnSurface()
     {
         if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, _groundDistance, _groundMask))
         {
-            Vector3 VerticalPosition = transform.up;
+
             transform.position = XMath.FILerp(transform.localPosition, hit.point + transform.up * _rideHeight, 8f);
         }
 
     }
 
-    RaycastHit hitInfo;
+    float _wallDistance = .4f;
+
     void MoveByInput()
     {
-        Vector3 NextPosition = transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+
+        // Vector3 NextPosition = transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+        Vector3 NextPosition = transform.position + _moveInput * _offset;
+
         // if after moving in the direction of input we would leave the ground platform
-        if (!Physics.Raycast(NextPosition, -transform.up, out hitInfo, _groundDistance, _groundMask))
+        if (!Physics.Raycast(NextPosition, -transform.up, _groundDistance, _groundMask))
         {
-            RecalculateMoveInputAlongEdge(hitInfo);
+            RecalculateMoveInputAlongEdge();
+        }
+        // is there is a wall in the way
+        else if (Physics.Raycast(transform.position, _moveInput, _wallDistance, _groundMask))
+        {
+            RecalculateMoveInputAlongWall();
         }
         else
         {
@@ -87,14 +103,65 @@ public class Move : MonoBehaviour
         }
     }
 
-
-    void RecalculateMoveInputAlongEdge(RaycastHit hit)
+    void RecalculateMoveInputAlongWall()
     {
-        // calculate a ray _offset in the moveinput direction;
-        Vector3 rayStart = transform.position + (_moveInput * _offset);
-        _moveInput = Vector3.ProjectOnPlane(_moveInput, hitInfo.normal);
-        Debug.DrawLine(rayStart, rayStart - transform.up, Color.red);
+        // Define ray directions offset by ±45° from the current move direction
+        Vector3 clockwiseRayDirection = Quaternion.AngleAxis(45, transform.up) * _moveInput;
+        Vector3 counterClockwiseRayDirection = Quaternion.AngleAxis(-45, transform.up) * _moveInput;
+
+        // Perform raycasts from the player's position in both directions
+        bool clockwiseHit = Physics.Raycast(transform.position, clockwiseRayDirection, _wallDistance, _groundMask);
+
+
+        Debug.DrawRay(transform.position, clockwiseRayDirection * _wallDistance, Color.blue);  // Visualize clockwise ray
+        Debug.DrawRay(transform.position, counterClockwiseRayDirection * _wallDistance, Color.green); // Visualize counterclockwise ray
+
+        // Decide how to adjust movement based on raycast results
+        if (clockwiseHit)
+        {
+            // Slide along the wall clockwise
+            _moveInput = clockwiseRayDirection;
+        }
+        else
+        {
+            // Slide along the wall counterclockwise
+            _moveInput = counterClockwiseRayDirection;
+        }
     }
+
+
+    void RecalculateMoveInputAlongEdge()
+    {
+
+        // Rotate ray start positions by 45 around transfrom up 
+        Vector3 clockwiseRayStart = Quaternion.AngleAxis(45, transform.up) * (_moveInput * _offset) + transform.position;
+        Vector3 counterClockwiseRayStart = Quaternion.AngleAxis(-45, transform.up) * (_moveInput * _offset) + transform.position;
+
+        // Perform downward raycasts from both rotated positions
+        bool clockwiseHit = Physics.Raycast(clockwiseRayStart, -transform.up, out RaycastHit cwHit, _groundDistance, _groundMask);
+        bool counterClockwiseHit = Physics.Raycast(counterClockwiseRayStart, -transform.up, out RaycastHit ccwHit, _groundDistance, _groundMask);
+
+
+        if (clockwiseHit && !counterClockwiseHit)
+        {
+            _moveInput = (clockwiseRayStart - transform.position).normalized;
+        }
+        else if (!clockwiseHit && counterClockwiseHit)
+        {
+            _moveInput = (counterClockwiseRayStart - transform.position).normalized;
+        }
+        else if (clockwiseHit && counterClockwiseHit)
+        {
+            // Choose the closer valid hit
+            _moveInput = (cwHit.distance < ccwHit.distance ? clockwiseRayStart : counterClockwiseRayStart - transform.position).normalized;
+        }
+        else
+        {
+            _moveInput = Vector3.zero;
+        }
+    }
+
+
 
 
 
