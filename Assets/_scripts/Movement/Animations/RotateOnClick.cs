@@ -12,7 +12,7 @@ public class RotateOnClick : MonoBehaviour
 
     Quaternion _targetRotation, _startRotation;
     float _timer = 0f;
-    bool isRotating;
+    public bool isRotating;
 
     public void Start()
     {
@@ -73,10 +73,38 @@ public class RotateOnClick : MonoBehaviour
         isRotating = false;
     }
 
+
+    bool checkSnappedRotation()
+    {
+        float threshold = .5f; // Allow for minor floating-point discrepancies.
+
+        Vector3 euler = transform.eulerAngles;
+        return Mathf.Abs(euler.x % RotationStep) < threshold &&
+               Mathf.Abs(euler.y % RotationStep) < threshold &&
+               Mathf.Abs(euler.z % RotationStep) < threshold;
+    }
+
+
+    void SnapToStep()
+    {
+        Vector3 euler = transform.eulerAngles;
+
+        euler.x = Mathf.Round(euler.x / RotationStep) * RotationStep;
+        euler.y = Mathf.Round(euler.y / RotationStep) * RotationStep;
+        euler.z = Mathf.Round(euler.z / RotationStep) * RotationStep;
+
+        transform.eulerAngles = euler;
+    }
+
     void Update()
     {
+        // this is some euler crap, that hopefully holds out, but is prone to breaking, if something is wrong with rotation this is likely where it will come from.
+        if (!checkSnappedRotation() && !isRotating)
+        {
+            SnapToStep();
+        }
         if (!isRotating) return;
-        // if (Quaternion.Angle(transform.rotation, _targetRotation) < .1f) return;
+
 
         _timer += Time.deltaTime;
         float elapsed = _timer / TimeToComplete;

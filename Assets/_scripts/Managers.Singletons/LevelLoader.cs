@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -20,15 +21,25 @@ public struct Level
 
 public class LevelLoader : MonoBehaviour
 {
+
+    public bool isDebugging;
+    public int DebugStartLevel;
+
+    [Space(40)]
     public InputReader inputs;
     public GameEvent OnLevelLoading;
     public Level[] levels;
+    [Space(400)]
 
     int _currentLevelIndex;
     Transform _player;
     ChangeUpAxis _camRotation;
     Vector3 levelStart = Vector3.zero;
     GameObject currentlevel;
+
+
+
+
 
     void Awake()
     {
@@ -43,7 +54,8 @@ public class LevelLoader : MonoBehaviour
 
     public void StartTheGame(object data)
     {
-        LoadLevel(0);
+        if (!isDebugging) LoadLevel(0);
+        else LoadLevel(DebugStartLevel);
     }
 
 
@@ -71,7 +83,5 @@ public class LevelLoader : MonoBehaviour
         _currentLevelIndex++;
         LoadLevel(_currentLevelIndex);
     }
-
-
 
 }
