@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugging: 0
-  DebugStartLevel: 9
+  DebugStartLevel: 10
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:
@@ -672,25 +672,25 @@ MonoBehaviour:
   - Hint: ::Face the wall and Spacebar
     LevelObject: {fileID: 236383396761025338, guid: 6fd6054693de1534d81530f6646f0dfc, type: 3}
     RequiresStateChange: 1
-  - Hint: ::Q and E to see
+  - Hint: '::Q and E '
     LevelObject: {fileID: 4574347413727495058, guid: 9f53345e726cab04691e4e2fd092e275, type: 3}
     RequiresStateChange: 1
-  - Hint: '::'
+  - Hint: ::there
     LevelObject: {fileID: 8174385527643485113, guid: 7313c5fbe32b1a5439769e14280d22ee, type: 3}
     RequiresStateChange: 1
-  - Hint: '::Initiallizing Developer uplink::'
+  - Hint: ::used
     LevelObject: {fileID: 2189694685713634483, guid: 9e8662303d91dd74f96d14c69c68cbae, type: 3}
     RequiresStateChange: 1
-  - Hint: ::...
+  - Hint: ::to be a
     LevelObject: {fileID: 8017814279385857356, guid: d317816bf0b97ae47a124300671dae8e, type: 3}
     RequiresStateChange: 0
-  - Hint: ::>>>
+  - Hint: ::secret here
     LevelObject: {fileID: 8776188429472177371, guid: 855d8822f09e7df4eb83f06c3edc64d2, type: 3}
     RequiresStateChange: 0
-  - Hint: ::remember backspace to reset!
+  - Hint: ::this broke my brain! remember reset is backspace.
     LevelObject: {fileID: 8783742996116976940, guid: 460495369ddecfb40b71723da832a5ec, type: 3}
     RequiresStateChange: 0
-  - Hint: 'Thank you for playing! '
+  - Hint: Thank you for playing!
     LevelObject: {fileID: 9117889218975725258, guid: eef1479195781294ba0a6db703862d5b, type: 3}
     RequiresStateChange: 0
 --- !u!114 &1964885723
