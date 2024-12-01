@@ -13,8 +13,17 @@ public class SFXLoader : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         source.clip = spawningClip;
-        source.Play();
+        source.pitch += Random.Range(-0.1f, 0.1f);
 
+
+        StartCoroutine(PlayClipWithRandomDelay());
+
+
+    }
+    IEnumerator PlayClipWithRandomDelay()
+    {
+        yield return new WaitForSecondsRealtime(Random.Range(0, .4f));
+        source.Play();
         StartCoroutine(SwitchClipWhenFinished());
     }
 

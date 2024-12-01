@@ -9,7 +9,7 @@ public class SwitchColorUI : MonoBehaviour
     RawImage _img;
     TMP_Text _text;
 
-    public Color a, b;
+
 
 
     bool usingText, usingRawImage;

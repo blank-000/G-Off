@@ -68,14 +68,28 @@ public class Move : MonoBehaviour
     }
 
 
-
+    // this is parenting co
     void RideOnSurface()
     {
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, _groundDistance, _groundMask))
-        {
+        // if we do not find a surface we escape early
+        if (!Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, _groundDistance, _groundMask)) return;
 
-            transform.position = XMath.FILerp(transform.localPosition, hit.point + transform.up * _rideHeight, 8f);
+        // we get the rotator component 
+        if (hit.transform.GetComponent<RotateOnClick>() is RotateOnClick rotator)
+        {
+            if (rotator.isRotating || rotator.isBeingRotated)
+            {
+                if (transform.parent == null) transform.parent = hit.transform;
+                // transform.position = XMath.FILerp(transform.position, hit.point + transform.up * _rideHeight, 8f);
+            }
+            else
+            {
+                transform.parent = null;
+                transform.position = XMath.FILerp(transform.localPosition, hit.point + transform.up * _rideHeight, 8f);
+            }
         }
+
+
 
     }
 

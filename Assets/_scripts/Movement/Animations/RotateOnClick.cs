@@ -12,7 +12,33 @@ public class RotateOnClick : MonoBehaviour
 
     Quaternion _targetRotation, _startRotation;
     float _timer = 0f;
+    RotateOnClick parentRotator;
     public bool isRotating;
+    bool hasRotatingParent;
+    public bool isBeingRotated
+    {
+        get
+        {
+            if (hasRotatingParent) return parentRotator.isRotating;
+            else return false;
+        }
+    }
+
+    void SetupRotationFlags()
+    {
+        if (transform.parent.CompareTag("Level")) hasRotatingParent = false;
+        else
+        {
+            parentRotator = transform.parent.GetComponent<RotateOnClick>();
+            if (parentRotator != null)
+                hasRotatingParent = true;
+        }
+    }
+
+    void OnEnable()
+    {
+        SetupRotationFlags();
+    }
 
     public void Start()
     {

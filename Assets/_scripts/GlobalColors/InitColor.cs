@@ -14,24 +14,42 @@ public class InitColor : MonoBehaviour
         Accent
     }
     public ChooseColorFromPalette Choice;
+    public ChooseColorFromPalette InvertedChoice;
 
 
-    Color _col;
+    Color _col, _invCol;
     List<Transform> _children = new List<Transform>();
     List<Renderer> _availableRenderers = new List<Renderer>();
+
+    public void InvertImageColors(object data)
+    {
+        if (data is WorldState state)
+        {
+            var rimg = GetComponent<Image>();
+            rimg.color = (state == WorldState.Dark) ? _col : _invCol;
+
+        }
+    }
 
 
     void Start()
     {
-        EvaluateColor(Choice);
+        _col = EvaluateColor(Choice);
+        _invCol = EvaluateColor(InvertedChoice);
 
-        // currently only works with raw image components, and exits early if the bool is set
+
+
         if (WorkWithUI)
         {
             var img = GetComponent<RawImage>();
+            var rimg = GetComponent<Image>();
             if (img != null)
             {
                 img.color = _col;
+            }
+            if (rimg != null)
+            {
+                rimg.color = _col;
             }
             return;
         }
@@ -82,24 +100,26 @@ public class InitColor : MonoBehaviour
 
 
 
-    private void EvaluateColor(ChooseColorFromPalette C)
+    private Color EvaluateColor(ChooseColorFromPalette C)
     {
+        Color col = Color.black;
         switch (C)
         {
             case (ChooseColorFromPalette.Light):
-                _col = Palette.Light;
+                col = Palette.Light;
                 break;
             case (ChooseColorFromPalette.MidTone):
-                _col = Palette.MidTone;
+                col = Palette.MidTone;
                 break;
             case (ChooseColorFromPalette.Dark):
-                _col = Palette.Dark;
+                col = Palette.Dark;
                 break;
             case (ChooseColorFromPalette.Accent):
-                _col = Palette.Accent;
+                col = Palette.Accent;
                 break;
 
         }
+        return col;
 
     }
 }

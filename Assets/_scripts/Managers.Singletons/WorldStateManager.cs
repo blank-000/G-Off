@@ -11,6 +11,7 @@ public class WorldStateManager : MonoBehaviour
 {
     public GameEvent OnStateChange;
     public GameEvent OnAxisChange;
+    public GameEvent OnFailedRotationAtempt;
 
     public InputReader Inputs;
 
@@ -67,7 +68,13 @@ public class WorldStateManager : MonoBehaviour
 
     void ChangeState()
     {
-        if (!CanTransitionState()) return;
+        if (!CanTransitionState())
+        {
+            // this is very poorly named!!
+            OnFailedRotationAtempt.Raise(false);
+            return;
+        }
+        OnFailedRotationAtempt.Raise(true);
         State = (State == WorldState.Dark) ? WorldState.Light : WorldState.Dark;
         OnAxisChange.Raise(hitInfo.normal);
         OnStateChange.Raise(State);

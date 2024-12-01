@@ -7,7 +7,7 @@ public class ChangeUpAxis : MonoBehaviour
     public float TimeToComplete;
     public AnimationCurve SmoothFn;
 
-
+    AudioSource source;
     Quaternion _targetRotation, _startRotation;
     float _timer = 0f;
     bool isRotating;
@@ -15,7 +15,8 @@ public class ChangeUpAxis : MonoBehaviour
 
     void Start()
     {
-        HandleStateChange(WorldStateManager.Instance.State);
+        source = GetComponent<AudioSource>();
+        // HandleStateChange(WorldStateManager.Instance.State);
         _upAxis = transform.up;
     }
     void OnEnable()
@@ -62,6 +63,7 @@ public class ChangeUpAxis : MonoBehaviour
     // we don't actually care about the state. we just want the updated rotation axis
 
     // wow this took like 15 minutes, that was cool
+
     public void HandleStateChange(object data)
     {
         if (data is Vector3 newUp)
@@ -93,6 +95,8 @@ public class ChangeUpAxis : MonoBehaviour
         _startRotation = transform.rotation;
         _timer = 0f;
         isRotating = true;
+        source.pitch = Random.Range(.9f, 1.2f);
+        source.Play();
     }
 
     void CompleteLerp()

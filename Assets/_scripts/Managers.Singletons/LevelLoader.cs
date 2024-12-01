@@ -55,12 +55,17 @@ public class LevelLoader : MonoBehaviour
     public void StartTheGame(object data)
     {
         if (!isDebugging) LoadLevel(0);
-        else LoadLevel(DebugStartLevel);
+        else
+        {
+            LoadLevel(DebugStartLevel);
+            _currentLevelIndex = DebugStartLevel;
+        }
     }
 
 
     void LoadLevel(int index)
     {
+        if (_player.parent != null) _player.parent = null;
         if (currentlevel != null) Destroy(currentlevel);
         if (levels[index].RequiresStateChange) WorldStateManager.Instance.ResetState();
         currentlevel = Instantiate(levels[index].LevelObject, Vector3.zero, Quaternion.identity);
