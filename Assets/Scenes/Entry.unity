@@ -521,7 +521,7 @@ AudioSource:
   m_GameObject: {fileID: 1765822079}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -1666561818793289666, guid: fca688d4bbe330b46a19175977a1f1c0, type: 2}
+  OutputAudioMixerGroup: {fileID: 5128171260354148379, guid: fca688d4bbe330b46a19175977a1f1c0, type: 2}
   m_audioClip: {fileID: 8300000, guid: aba2c93c046c6de43b87c233f4aa4d89, type: 3}
   m_Resource: {fileID: 8300000, guid: aba2c93c046c6de43b87c233f4aa4d89, type: 3}
   m_PlayOnAwake: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugging: 0
-  DebugStartLevel: 10
+  DebugStartLevel: 6
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:
