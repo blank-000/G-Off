@@ -3,6 +3,7 @@ using System.Data;
 using Unity.Mathematics;
 using UnityEngine;
 
+
 [System.Serializable]
 public struct Level
 {
@@ -88,5 +89,6 @@ public class LevelLoader : MonoBehaviour
         _currentLevelIndex++;
         LoadLevel(_currentLevelIndex);
     }
+
 
 }
