@@ -44,6 +44,12 @@ public class RotateOnClick : MonoBehaviour
     {
         _audioS = GetComponent<AudioSource>();
         _targetRotation = transform.rotation;
+        transform.localPosition = new Vector3(
+            Mathf.Round(transform.localPosition.x),
+            Mathf.Round(transform.localPosition.y),
+            Mathf.Round(transform.localPosition.z)
+
+        );
     }
 
     public void HandleStateChange(object data)
