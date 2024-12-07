@@ -23,6 +23,8 @@ public class RotateOnClick : MonoBehaviour
             else return false;
         }
     }
+    public ExpandToSize _sizerNormal, _sizerHidden;
+
 
     void SetupRotationFlags()
     {
@@ -40,8 +42,23 @@ public class RotateOnClick : MonoBehaviour
         SetupRotationFlags();
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        _sizerNormal.SetTarget(Vector3.zero);
+        _sizerHidden.SetTarget(Vector3.one);
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        _sizerNormal.SetTarget(Vector3.one);
+        _sizerHidden.SetTarget(Vector3.zero);
+    }
+
+
     public void Start()
     {
+
         _audioS = GetComponent<AudioSource>();
         _targetRotation = transform.rotation;
         transform.localPosition = new Vector3(
@@ -57,23 +74,7 @@ public class RotateOnClick : MonoBehaviour
         if (data is Vector3 newUp)
         {
             RotationAxis = newUp;
-            // Quaternion newTarget = Quaternion.FromToRotation(transform.up, RotationAxis) * transform.rotation;
-            // InitializeLerpTo(newTarget.eulerAngles);
 
-        }
-        if (data is WorldState state)
-        {
-            switch (state)
-            {
-                case WorldState.Light:
-                    // x is up 
-                    RotationAxis = Vector3.forward;
-                    break;
-                case WorldState.Dark:
-                    // y is up
-                    RotationAxis = Vector3.up;
-                    break;
-            }
         }
     }
 
