@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7596352303569925207}
   - component: {fileID: 1296970036332472521}
   - component: {fileID: 5915286778682317754}
+  - component: {fileID: 2135982868126699268}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -91,6 +92,35 @@ MonoBehaviour:
   SearchInChildren: 0
   WorkWithUI: 1
   Choice: 0
+  InvertedChoice: 2
+--- !u!114 &2135982868126699268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182605924230151109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5915286778682317754}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &427430220942704877
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +133,7 @@ GameObject:
   - component: {fileID: 7736399393780488748}
   - component: {fileID: 2819769816367620200}
   - component: {fileID: 3549339490221394558}
+  - component: {fileID: 7052235575399795206}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -182,6 +213,35 @@ MonoBehaviour:
   SearchInChildren: 0
   WorkWithUI: 1
   Choice: 2
+  InvertedChoice: 0
+--- !u!114 &7052235575399795206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427430220942704877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3549339490221394558}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &798092186091125971
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +254,7 @@ GameObject:
   - component: {fileID: 5579908539966464858}
   - component: {fileID: 8695348980394322975}
   - component: {fileID: 3321030613446877501}
+  - component: {fileID: 1179930950679285509}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -273,6 +334,35 @@ MonoBehaviour:
   SearchInChildren: 0
   WorkWithUI: 1
   Choice: 2
+  InvertedChoice: 0
+--- !u!114 &1179930950679285509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798092186091125971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3321030613446877501}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2067146729696467484
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +533,7 @@ GameObject:
   - component: {fileID: 2869726996648977040}
   - component: {fileID: 4850076527866012996}
   - component: {fileID: 993229359086706656}
+  - component: {fileID: 82356480101825168}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -522,6 +613,35 @@ MonoBehaviour:
   SearchInChildren: 0
   WorkWithUI: 1
   Choice: 0
+  InvertedChoice: 2
+--- !u!114 &82356480101825168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264241176582445815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 993229359086706656}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4988857903749584029
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +1027,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.3
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -937,8 +1057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: fca688d4bbe330b46a19175977a1f1c0, type: 2}
   TargetParameter: BGM Volume
-  minVolumeDb: -40
-  maxVolumeDb: 0
+  minVolumeDb: -45
+  maxVolumeDb: -5
 --- !u!1 &6150407163386202475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,17 +1382,17 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.7
+  m_Value: 0.85
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1666561818793289666, guid: fca688d4bbe330b46a19175977a1f1c0, type: 2}
-        m_TargetAssemblyTypeName: UnityEditor.Audio.AudioMixerGroupController, UnityEditor.CoreModule
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 5021264055200005959}
+        m_TargetAssemblyTypeName: VolumeControl, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
