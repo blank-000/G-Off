@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public Texture2D lightCursor, darkCursor;
+    Vector2 cursorHotspot = new Vector2(32, 32);
 
     void Start()
     {
+        cursorHotspot = new Vector2(lightCursor.Size().x / 2, lightCursor.Size().y / 2f);
         HandleStateChange(WorldStateManager.Instance.State);
     }
 
@@ -18,10 +21,10 @@ public class UIManager : MonoBehaviour
             switch (state)
             {
                 case WorldState.Light:
-                    Cursor.SetCursor(lightCursor, Vector2.zero, CursorMode.Auto);
+                    Cursor.SetCursor(lightCursor, cursorHotspot, CursorMode.Auto);
                     break;
                 case WorldState.Dark:
-                    Cursor.SetCursor(darkCursor, Vector2.zero, CursorMode.Auto);
+                    Cursor.SetCursor(darkCursor, cursorHotspot, CursorMode.Auto);
                     break;
             }
         }
