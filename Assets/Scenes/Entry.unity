@@ -476,58 +476,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugging: 0
-  DebugStartLevel: 9
+  DebugStartLevel: 5
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:
   - Hint: ::Get to Blue
     LevelObject: {fileID: 4444146890049974828, guid: b916408587dbf67488c9b8622ddf4834, type: 3}
     RequiresStateChange: 0
-  - Hint: ::Click and Right Click on Blocks
+  - Hint: '::Click ::Right Click : Blocks'
     LevelObject: {fileID: 2379301308383383039, guid: 145ed8db91405444c8790020a7877f4a, type: 3}
     RequiresStateChange: 0
-  - Hint: ::Backspace will reset the world
+  - Hint: ::Backspace ::reset
     LevelObject: {fileID: 1615401261098307851, guid: 7980253231064684e95a3d548c543bbe, type: 3}
     RequiresStateChange: 0
-  - Hint: ::Face the wall and Spacebar
+  - Hint: ::Face wall  ::Spacebar
     LevelObject: {fileID: 236383396761025338, guid: 6fd6054693de1534d81530f6646f0dfc, type: 3}
     RequiresStateChange: 1
-  - Hint: '::Q and E '
+  - Hint: ::Q ::E ::Look
     LevelObject: {fileID: 4574347413727495058, guid: 9f53345e726cab04691e4e2fd092e275, type: 3}
     RequiresStateChange: 1
-  - Hint: ::roundabout
+  - Hint: ::Order
     LevelObject: {fileID: 8174385527643485113, guid: 7313c5fbe32b1a5439769e14280d22ee, type: 3}
     RequiresStateChange: 1
-  - Hint: ::rotation is around what is up
+  - Hint: ::rotation is ::what is up
     LevelObject: {fileID: 2189694685713634483, guid: 9e8662303d91dd74f96d14c69c68cbae, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::look around
+    RequiresStateChange: 1
+  - Hint: '::look '
     LevelObject: {fileID: 8017814279385857356, guid: d317816bf0b97ae47a124300671dae8e, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::trust your ears
+    RequiresStateChange: 1
+  - Hint: ::Ears > eyes
     LevelObject: {fileID: 8776188429472177371, guid: 855d8822f09e7df4eb83f06c3edc64d2, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::the way twists and turns
+    RequiresStateChange: 1
+  - Hint: ::twists + turns
     LevelObject: {fileID: 8783742996116976940, guid: 460495369ddecfb40b71723da832a5ec, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::the trek
+    RequiresStateChange: 1
+  - Hint: ::trek
     LevelObject: {fileID: 8424598047855162303, guid: f1d01cfc8ea9fe84f954350669e715ab, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::the long way round
+    RequiresStateChange: 1
+  - Hint: ::ahead
     LevelObject: {fileID: 4606243178063139365, guid: ff6349a9d94e5d04d95d5fec6b4aa45a, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::it's intentional
+    RequiresStateChange: 1
+  - Hint: ::intentional
     LevelObject: {fileID: 6761245160083974523, guid: 8633e0be081716744bcea0431d78d458, type: 3}
     RequiresStateChange: 1
   - Hint: ::Fiddly
     LevelObject: {fileID: 5946929643775881015, guid: ae4ebe4690043aa4faeaee2b4d0ef43a, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::down and around
+    RequiresStateChange: 1
+  - Hint: ::down + under
     LevelObject: {fileID: 8783742996116976940, guid: a713500eb55417940bcfa791ee7016dd, type: 3}
-    RequiresStateChange: 0
-  - Hint: ::the climb
+    RequiresStateChange: 1
+  - Hint: ::climb
     LevelObject: {fileID: 7546182350033054133, guid: 7d5156a1334b6f940a2d0bede9008642, type: 3}
-    RequiresStateChange: 0
+    RequiresStateChange: 1
   - Hint: Thank you for playing!
     LevelObject: {fileID: 9117889218975725258, guid: eef1479195781294ba0a6db703862d5b, type: 3}
     RequiresStateChange: 0
@@ -682,6 +682,10 @@ PrefabInstance:
     - target: {fileID: 4570480872070239174, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.056
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228788744174055, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
+      propertyPath: response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6150407163386202475, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
       propertyPath: m_Name

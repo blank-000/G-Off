@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -10,7 +7,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        cursorHotspot = new Vector2(lightCursor.Size().x / 2, lightCursor.Size().y / 2f);
+        cursorHotspot = new Vector2(lightCursor.width / 2, lightCursor.height / 2f);
         HandleStateChange(WorldStateManager.Instance.State);
     }
 
