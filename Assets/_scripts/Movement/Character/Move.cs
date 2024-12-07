@@ -44,6 +44,7 @@ public class Move : MonoBehaviour
     [SerializeField] float _groundDistance;
     [SerializeField] float _rideHeight;
     [SerializeField] LayerMask _groundMask;
+    float _wallDistance = .4f;
 
 
     void Start()
@@ -61,20 +62,20 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-
-        SetMoving(!XMath.AlmostZero(_moveInput));
+        UpdateInput(true);
+        Debug.Log($"Move Input: {_moveInput}");
         RideOnSurface();
         MoveByInput();
+        SetMoving(!XMath.AlmostZero(_moveInput));
     }
 
 
-    // this is parenting co
     void RideOnSurface()
     {
         // if we do not find a surface we escape early
         if (!Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, _groundDistance, _groundMask)) return;
 
-        // we get the rotator component 
+        // get the rotator component 
         if (hit.transform.GetComponent<RotateOnClick>() is RotateOnClick rotator)
         {
             if (rotator.isRotating || rotator.isBeingRotated)
@@ -88,28 +89,28 @@ public class Move : MonoBehaviour
                 transform.position = XMath.FILerp(transform.localPosition, hit.point + transform.up * _rideHeight, 8f);
             }
         }
-
-
-
     }
 
-    float _wallDistance = .4f;
+
 
     void MoveByInput()
     {
 
-        // Vector3 NextPosition = transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+        // added offset instead of (_settings.maxSpeed * Time.deltaTime;) 
+        // to better control how far from the edge is acceptable to travel
         Vector3 NextPosition = transform.position + _moveInput * _offset;
 
-        // if after moving in the direction of input we would leave the ground platform
+        // if after moving in the direction of input we would leave the platform
         if (!Physics.Raycast(NextPosition, -transform.up, _groundDistance, _groundMask))
         {
             RecalculateMoveInputAlongEdge();
+            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
         }
         // is there is a wall in the way
         else if (Physics.Raycast(transform.position, _moveInput, _wallDistance, _groundMask))
         {
             RecalculateMoveInputAlongWall();
+            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
         }
         else
         {
@@ -117,66 +118,71 @@ public class Move : MonoBehaviour
         }
     }
 
+
     void RecalculateMoveInputAlongWall()
     {
         // Define ray directions offset by ±45° from the current move direction
-        Vector3 clockwiseRayDirection = Quaternion.AngleAxis(45, transform.up) * _moveInput;
-        Vector3 counterClockwiseRayDirection = Quaternion.AngleAxis(-45, transform.up) * _moveInput;
+        Vector3 rightDirection = Quaternion.AngleAxis(45, transform.up) * _moveInput;
+        Vector3 leftDirection = Quaternion.AngleAxis(-45, transform.up) * _moveInput;
 
-        // Perform raycasts from the player's position in both directions
-        bool clockwiseHit = Physics.Raycast(transform.position, clockwiseRayDirection, _wallDistance, _groundMask);
+        bool rightHit = Physics.Raycast(transform.position, rightDirection, _wallDistance, _groundMask);
+        bool leftHit = Physics.Raycast(transform.position, leftDirection - transform.up, _wallDistance, _groundMask);
 
+        // debugging
+        // Color left = leftHit ? Color.green : Color.red;
+        // Color right = rightHit ? Color.green : Color.red;
+        // Debug.DrawLine(transform.position, transform.position + rightDirection * _wallDistance, right);   // Visualize right ray
+        // Debug.DrawLine(transform.position, transform.position + leftDirection * _wallDistance, left); // Visualize left ray
 
-        Debug.DrawRay(transform.position, clockwiseRayDirection * _wallDistance, Color.blue);  // Visualize clockwise ray
-        Debug.DrawRay(transform.position, counterClockwiseRayDirection * _wallDistance, Color.green); // Visualize counterclockwise ray
-
-        // Decide how to adjust movement based on raycast results
-        if (clockwiseHit)
+        // Determine valid sliding direction
+        if (!rightHit && leftHit)
         {
-            // Slide along the wall clockwise
-            _moveInput = clockwiseRayDirection;
+            _moveInput = rightDirection.normalized;
+        }
+        else if (!leftHit && rightHit)
+        {
+            _moveInput = leftDirection.normalized;
         }
         else
         {
-            // Slide along the wall counterclockwise
-            _moveInput = counterClockwiseRayDirection;
+            // Stop at corners or if both sides are invalid
+            _moveInput = Vector3.zero;
         }
     }
 
 
     void RecalculateMoveInputAlongEdge()
     {
+        Vector3 rightDirection = Quaternion.AngleAxis(45, transform.up) * _moveInput;
+        Vector3 leftDirection = Quaternion.AngleAxis(-45, transform.up) * _moveInput;
 
-        // Rotate ray start positions by 45 around transfrom up 
-        Vector3 clockwiseRayStart = Quaternion.AngleAxis(45, transform.up) * (_moveInput * _offset) + transform.position;
-        Vector3 counterClockwiseRayStart = Quaternion.AngleAxis(-45, transform.up) * (_moveInput * _offset) + transform.position;
+        Vector3 rightRayOrigin = transform.position + rightDirection * _offset;
+        Vector3 leftRayOrigin = transform.position + leftDirection * _offset;
 
-        // Perform downward raycasts from both rotated positions
-        bool clockwiseHit = Physics.Raycast(clockwiseRayStart, -transform.up, out RaycastHit cwHit, _groundDistance, _groundMask);
-        bool counterClockwiseHit = Physics.Raycast(counterClockwiseRayStart, -transform.up, out RaycastHit ccwHit, _groundDistance, _groundMask);
+        // Perform raycasts to the right and left
+        bool rightHit = Physics.Raycast(rightRayOrigin, -transform.up, _groundDistance, _groundMask);
+        bool leftHit = Physics.Raycast(leftRayOrigin, -transform.up, _groundDistance, _groundMask);
 
+        // debugging
+        // Color left = leftHit ? Color.green : Color.red;
+        // Color right = rightHit ? Color.green : Color.red;
+        // Debug.DrawLine(rightRayOrigin, rightRayOrigin + -transform.up * _groundDistance, right);   // Visualize right ray
+        // Debug.DrawLine(leftRayOrigin, leftRayOrigin + -transform.up * _groundDistance, left); // Visualize left ray
 
-        if (clockwiseHit && !counterClockwiseHit)
+        // Determine valid sliding direction
+        if (rightHit && !leftHit)
         {
-            _moveInput = (clockwiseRayStart - transform.position).normalized;
+            _moveInput = rightDirection.normalized;
         }
-        else if (!clockwiseHit && counterClockwiseHit)
+        else if (leftHit && !rightHit)
         {
-            _moveInput = (counterClockwiseRayStart - transform.position).normalized;
-        }
-        else if (clockwiseHit && counterClockwiseHit)
-        {
-            // Choose the closer valid hit
-            _moveInput = (cwHit.distance < ccwHit.distance ? clockwiseRayStart : counterClockwiseRayStart - transform.position).normalized;
+            _moveInput = leftDirection.normalized;
         }
         else
         {
+            // Stop at corners or if both sides are invalid
             _moveInput = Vector3.zero;
         }
     }
-
-
-
-
 
 }
