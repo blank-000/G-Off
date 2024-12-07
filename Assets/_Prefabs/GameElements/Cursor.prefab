@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1296970036332472521}
   - component: {fileID: 5915286778682317754}
   - component: {fileID: 2135982868126699268}
+  - component: {fileID: 5393959487855227692}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -121,6 +122,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5393959487855227692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182605924230151109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5915286778682317754}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &427430220942704877
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +163,7 @@ GameObject:
   - component: {fileID: 2819769816367620200}
   - component: {fileID: 3549339490221394558}
   - component: {fileID: 7052235575399795206}
+  - component: {fileID: 2648184440313452583}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -242,6 +272,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2648184440313452583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427430220942704877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3549339490221394558}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &798092186091125971
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +313,7 @@ GameObject:
   - component: {fileID: 8695348980394322975}
   - component: {fileID: 3321030613446877501}
   - component: {fileID: 1179930950679285509}
+  - component: {fileID: 4863280462311270200}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -336,6 +395,34 @@ MonoBehaviour:
   Choice: 2
   InvertedChoice: 0
 --- !u!114 &1179930950679285509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798092186091125971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3321030613446877501}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4863280462311270200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,6 +621,7 @@ GameObject:
   - component: {fileID: 4850076527866012996}
   - component: {fileID: 993229359086706656}
   - component: {fileID: 82356480101825168}
+  - component: {fileID: 1874070697786978749}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -615,6 +703,34 @@ MonoBehaviour:
   Choice: 0
   InvertedChoice: 2
 --- !u!114 &82356480101825168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2264241176582445815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 993229359086706656}
+        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
+        m_MethodName: InvertImageColors
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1874070697786978749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1027,7 +1143,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.6
+  m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1178,8 +1294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec3680d8ca9ffb4697a4eb36cc8d588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightCursor: {fileID: 2800000, guid: ef97d98643e43494f93e8480a0b4245a, type: 3}
-  darkCursor: {fileID: 2800000, guid: 27a5e156b89495a4eb5cadfd2bccb2b8, type: 3}
+  lightCursor: {fileID: 2800000, guid: 5c95596be570f0947bac89de425daf2c, type: 3}
+  darkCursor: {fileID: 2800000, guid: af3cc53ae228dfb48b737a6687b3f8aa, type: 3}
 --- !u!114 &6118795762207691716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,7 +1498,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.85
+  m_Value: 0.8
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

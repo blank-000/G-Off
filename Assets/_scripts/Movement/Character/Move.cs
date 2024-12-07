@@ -104,18 +104,20 @@ public class Move : MonoBehaviour
         if (!Physics.Raycast(NextPosition, -transform.up, _groundDistance, _groundMask))
         {
             RecalculateMoveInputAlongEdge();
-            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+            // check for walls 
+            if (Physics.Raycast(transform.position, _moveInput, _wallDistance, _groundMask))
+            {
+                _moveInput = Vector3.zero;
+            }
         }
         // is there is a wall in the way
         else if (Physics.Raycast(transform.position, _moveInput, _wallDistance, _groundMask))
         {
             RecalculateMoveInputAlongWall();
-            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
         }
-        else
-        {
-            transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
-        }
+
+        transform.position += _moveInput * _settings.maxSpeed * Time.deltaTime;
+
     }
 
 
