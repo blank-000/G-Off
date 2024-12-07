@@ -119,138 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &636461750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 427430220942704877, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &636461754 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3549339490221394558, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636461750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eab89cbdd8de94eb7c1fb51cc05c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &636461755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636461750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 636461754}
-        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
-        m_MethodName: InvertImageColors
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &955436305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 182605924230151109, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &955436309 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5915286778682317754, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955436305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eab89cbdd8de94eb7c1fb51cc05c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &955436310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955436305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 955436309}
-        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
-        m_MethodName: InvertImageColors
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1221532408 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2264241176582445815, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1221532412 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 993229359086706656, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221532408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eab89cbdd8de94eb7c1fb51cc05c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1221532413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221532408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1221532412}
-        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
-        m_MethodName: InvertImageColors
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1344258084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -459,50 +327,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1696291050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 798092186091125971, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1696291054 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3321030613446877501, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696291050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eab89cbdd8de94eb7c1fb51cc05c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1696291055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696291050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f74c4a76580e0b40ac3f2c1dfb69cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 14b6b1cddcccc09438b47d0c9d222e77, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1696291054}
-        m_TargetAssemblyTypeName: InitColor, Assembly-CSharp
-        m_MethodName: InvertImageColors
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1765822079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7802439810926728965, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
@@ -652,7 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebugging: 0
-  DebugStartLevel: 1
+  DebugStartLevel: 9
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:
@@ -771,22 +595,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 497980335561247246, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_Value
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 993229359086706656, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: InvertedChoice
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363613750882683233, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: maxVolumeDb
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4363613750882683233, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: minVolumeDb
-      value: -45
-      objectReference: {fileID: 0}
     - target: {fileID: 4446402696912073192, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -875,10 +683,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.056
       objectReference: {fileID: 0}
-    - target: {fileID: 5915286778682317754, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: InvertedChoice
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6150407163386202475, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
       propertyPath: m_Name
       value: Cursor
@@ -891,66 +695,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6837162942212744743, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_Value
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 6883389539966357080}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: VolumeControl, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551990484485729320, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2264241176582445815, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1221532413}
-    - targetCorrespondingSourceObject: {fileID: 427430220942704877, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 636461755}
-    - targetCorrespondingSourceObject: {fileID: 182605924230151109, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 955436310}
-    - targetCorrespondingSourceObject: {fileID: 798092186091125971, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1696291055}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
---- !u!114 &6883389539966357080 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5021264055200005959, guid: 83c78a1df9e9e7e46b9037892c4c0710, type: 3}
-  m_PrefabInstance: {fileID: 6883389539966357078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572f50213e38756459e73445e9a2d86e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8002782545896486589
 PrefabInstance:
   m_ObjectHideFlags: 0

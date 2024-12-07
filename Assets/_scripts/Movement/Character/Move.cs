@@ -63,7 +63,6 @@ public class Move : MonoBehaviour
     void Update()
     {
         UpdateInput(true);
-        Debug.Log($"Move Input: {_moveInput}");
         RideOnSurface();
         MoveByInput();
         SetMoving(!XMath.AlmostZero(_moveInput));

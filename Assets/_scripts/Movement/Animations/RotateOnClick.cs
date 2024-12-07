@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 // This is a almost one to one repeat of ChangeUpAxis, both of which should be refactored. 
@@ -9,6 +11,8 @@ public class RotateOnClick : MonoBehaviour
     Vector3 RotationAxis = Vector3.up;
     public float TimeToComplete;
     public AnimationCurve SmoothFn;
+    [HideInInspector]
+    public event UnityAction<int> rotationEvent;
 
     Quaternion _targetRotation, _startRotation;
     float _timer = 0f;
@@ -33,9 +37,13 @@ public class RotateOnClick : MonoBehaviour
         {
             parentRotator = transform.parent.GetComponent<RotateOnClick>();
             if (parentRotator != null)
+            {
                 hasRotatingParent = true;
+                parentRotator.rotationEvent += PassOnRotation;
+            }
         }
     }
+
 
     void OnEnable()
     {
@@ -78,11 +86,16 @@ public class RotateOnClick : MonoBehaviour
         }
     }
 
+    void PassOnRotation(int dir)
+    {
+        Activate(dir);
+    }
 
     public void Activate(int direction)
     {
         if (isRotating) return;
-        _audioS.pitch = Random.Range(.95f, 1.05f);
+        if (rotationEvent != null) rotationEvent.Invoke(direction);
+        _audioS.pitch = UnityEngine.Random.Range(.95f, 1.05f);
         _audioS.Play();
         Quaternion newTarget = Quaternion.AngleAxis(direction * RotationStep, RotationAxis) * transform.rotation;
         InitializeLerpTo(newTarget);
