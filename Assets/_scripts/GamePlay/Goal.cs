@@ -22,4 +22,13 @@ public class Goal : MonoBehaviour
         }
 
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.transform.CompareTag("Player") && !triggered && !Rotator.isRotating)
+        {
+            Debug.Log("next Level");
+            OnLevelComplete.Raise(true);
+            triggered = true;
+        }
+    }
 }

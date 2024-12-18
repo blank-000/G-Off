@@ -27,6 +27,8 @@ public class Rotate : MonoBehaviour
 
         if (data is Vector3 newUp)
         {
+            // Avoid redundant reorientation if the direction is nearly the same
+            if (Vector3.Dot(_gravityDirection, -newUp) > 0.99f) return;
             _gravityDirection = -newUp;
             StartCoroutine(ReorientUp());
         }
@@ -83,9 +85,4 @@ public class Rotate : MonoBehaviour
         Quaternion target = Quaternion.LookRotation(ProjectedWorldPos, transform.up);
         transform.rotation = target;
     }
-
-
-
-
-
 }

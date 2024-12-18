@@ -226,15 +226,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0.06274473
+      value: 0.3960784
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0.1285288
+      value: 0.6509804
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0.28301886
+      value: 0.9647059
       objectReference: {fileID: 0}
     - target: {fileID: 7802439810926728965, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_Name
@@ -475,8 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6d6b3dc4bd19a46b86ab02f8680672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebugging: 0
-  DebugStartLevel: 5
+  isDebugging: 1
+  DebugStartLevel: 9
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:

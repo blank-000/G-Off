@@ -6,6 +6,7 @@ using UnityEngine.Events;
 // This is a almost one to one repeat of ChangeUpAxis, both of which should be refactored. 
 public class RotateOnClick : MonoBehaviour
 {
+    public bool IsGoal;
     AudioSource _audioS;
     float RotationStep = 90f;
     Vector3 RotationAxis = Vector3.up;
@@ -52,13 +53,13 @@ public class RotateOnClick : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") || IsGoal) return;
         _sizerNormal.SetTarget(Vector3.zero);
         _sizerHidden.SetTarget(Vector3.one);
     }
     void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") || IsGoal) return;
         _sizerNormal.SetTarget(Vector3.one);
         _sizerHidden.SetTarget(Vector3.zero);
     }
