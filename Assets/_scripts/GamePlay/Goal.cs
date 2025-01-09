@@ -16,7 +16,7 @@ public class Goal : MonoBehaviour
     {
         if (other.transform.CompareTag("Player") && !triggered && !Rotator.isRotating)
         {
-            Debug.Log("next Level");
+
             OnLevelComplete.Raise(true);
             triggered = true;
         }
@@ -26,7 +26,7 @@ public class Goal : MonoBehaviour
     {
         if (other.transform.CompareTag("Player") && !triggered && !Rotator.isRotating)
         {
-            Debug.Log("next Level");
+
             OnLevelComplete.Raise(true);
             triggered = true;
         }

@@ -119,6 +119,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1184534193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3346809081313676387, guid: 87f35ce6b6d39914b99cea49dfd36683, type: 3}
+  m_PrefabInstance: {fileID: 8002782545896486589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1184534199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184534193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5599102a9b31e014d92a345ce2ba9107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTex: {fileID: 2800000, guid: e499576d307c4b6439f1e3acbc176865, type: 3}
 --- !u!1001 &1344258084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0.3960784
+      value: 0.06274473
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0.6509804
+      value: 0.1285288
       objectReference: {fileID: 0}
     - target: {fileID: 2722320981558009688, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0.9647059
+      value: 0.28301886
       objectReference: {fileID: 0}
     - target: {fileID: 7802439810926728965, guid: 120a1958d6eb8af4aa0fde4d9826a241, type: 3}
       propertyPath: m_Name
@@ -475,20 +493,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6d6b3dc4bd19a46b86ab02f8680672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebugging: 1
+  isDebugging: 0
   DebugStartLevel: 9
   inputs: {fileID: 11400000, guid: d25845bae17403b4794a495d88f1d6b0, type: 2}
   OnLevelLoading: {fileID: 11400000, guid: de68d614909863a4caf4231b4563cd41, type: 2}
   levels:
   - Hint: ::Get to Blue
     LevelObject: {fileID: 4444146890049974828, guid: b916408587dbf67488c9b8622ddf4834, type: 3}
-    RequiresStateChange: 0
+    RequiresStateChange: 1
   - Hint: '::Click ::Right Click : Blocks'
     LevelObject: {fileID: 2379301308383383039, guid: 145ed8db91405444c8790020a7877f4a, type: 3}
-    RequiresStateChange: 0
+    RequiresStateChange: 1
   - Hint: ::Backspace ::reset
     LevelObject: {fileID: 1615401261098307851, guid: 7980253231064684e95a3d548c543bbe, type: 3}
-    RequiresStateChange: 0
+    RequiresStateChange: 1
   - Hint: ::Face wall  ::Spacebar
     LevelObject: {fileID: 236383396761025338, guid: 6fd6054693de1534d81530f6646f0dfc, type: 3}
     RequiresStateChange: 1
@@ -530,7 +548,7 @@ MonoBehaviour:
     RequiresStateChange: 1
   - Hint: Thank you for playing!
     LevelObject: {fileID: 9117889218975725258, guid: eef1479195781294ba0a6db703862d5b, type: 3}
-    RequiresStateChange: 0
+    RequiresStateChange: 1
 --- !u!114 &1964885723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,10 +774,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 5674684075671288182, guid: 87f35ce6b6d39914b99cea49dfd36683, type: 3}
+      propertyPath: stateText
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3346809081313676387, guid: 87f35ce6b6d39914b99cea49dfd36683, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1184534199}
   m_SourcePrefab: {fileID: 100100000, guid: 87f35ce6b6d39914b99cea49dfd36683, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

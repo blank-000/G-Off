@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum WorldState
@@ -59,6 +60,7 @@ public class WorldStateManager : MonoBehaviour
         return new Color(1f, 1f, 1f, 1f);
     }
 
+
     public void ResetState()
     {
         State = WorldState.Dark;
@@ -79,5 +81,6 @@ public class WorldStateManager : MonoBehaviour
         OnAxisChange.Raise(hitInfo.normal);
         OnStateChange.Raise(State);
     }
+
 
 }

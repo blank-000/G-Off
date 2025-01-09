@@ -29,6 +29,7 @@ public class LevelLoader : MonoBehaviour
     [Space(40)]
     public InputReader inputs;
     public GameEvent OnLevelLoading;
+
     public Level[] levels;
     [Space(400)]
 
@@ -68,13 +69,17 @@ public class LevelLoader : MonoBehaviour
     {
         if (_player.parent != null) _player.parent = null;
         if (currentlevel != null) Destroy(currentlevel);
-        if (levels[index].RequiresStateChange) WorldStateManager.Instance.ResetState();
+
+        WorldStateManager.Instance.ResetState();
         currentlevel = Instantiate(levels[index].LevelObject, Vector3.zero, Quaternion.identity);
 
         OnLevelLoading.Raise(levels[index]);
 
+        // string implementation would require three events because of the types
+        // OnCurrentLevelHintChanged.Raise(levels[index].Hint);
+
         _player.position = levelStart;
-        _player.rotation = quaternion.identity;
+        // _player.rotation = quaternion.identity;
         _camRotation.SetLevelRotation(Vector3.zero);
     }
 

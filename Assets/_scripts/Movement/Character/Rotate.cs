@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,24 +31,14 @@ public class Rotate : MonoBehaviour
             // Avoid redundant reorientation if the direction is nearly the same
             if (Vector3.Dot(_gravityDirection, -newUp) > 0.99f) return;
             _gravityDirection = -newUp;
+            if (_isReorienting)
+            {
+                StopAllCoroutines();
+                transform.rotation = quaternion.identity;
+            }
             StartCoroutine(ReorientUp());
         }
-        if (data is WorldState state)
-        {
-            switch (state)
-            {
-                case WorldState.Light:
-                    // x is up 
-                    _gravityDirection = Vector3.forward;
-                    StartCoroutine(ReorientUp());
-                    break;
-                case WorldState.Dark:
-                    // y is up. this is the starting state
-                    _gravityDirection = Vector3.down;
-                    StartCoroutine(ReorientUp());
-                    break;
-            }
-        }
+
     }
 
 
